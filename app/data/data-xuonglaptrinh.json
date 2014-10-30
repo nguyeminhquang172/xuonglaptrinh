@@ -1,98 +1,101 @@
-// table role
-	{
-		"id" : "23401",
-		"code" : "number",
-		"description" : "string"
-	},
-	{
-		"id" : "23402",
-		"code" : "number",
-		"description" : "string"
-	},
-	{
-		"id" : "23403",
-		"code" : "number",
-		"description" : "string"
-	}
+tbl_courses
 
-// table user 													null
-	{
-		"id" : "574301",
-		"email" : "string",
-		"password" : "string",
-		"full_name" : "string",
-		"birth_day" : "date",
-		"CMTND" : "string",										x
-		"phone" : "string",
-		"address" : "string",
-		"avatar" : "string",									x
-		"role" : "number"
-	}
+fields 							null		type
 
-	{
-  "fullName": "",
-  "birthday": "",
-  "phone": "",
-  "Addr": "",
-  "avatar": "",
-  "email": "",
-  "created": "",
-  "lastUpdated": ""
-}
+title 										string
+subtitle 									string
+description									string
+summary										string
+imange 										string
+teacher										string
+timeLearn									number
+tuitionFee 						x			string
+sallOff							x			number
+dayLearn 						x			string
+startTime 						x			string
+startDate 						x			string
+note							x			string
+location									string
 
-// table courses 												null
-	{
-		"id" : "2910293",
-		"title" : "string",
-		"subtitle" : "string",									x
-		"description" : "string",
-		"summary" : "string",
-		"image_view" : "string",
-		"teacher" : "string",
-		"time_learn" : "number",
-		"tuition-fee" : "string",
-		"sale_of" : "number",									x
-		"day_learn" : "string",									x
-		"start_time" : "string",								x
-		"start_date" : "string",								x
-		"note" : "string",										x
-		"location" : "string"
 
-	}
+(các trường cho phép null dùng chung cho online và offline)
 
-// table session 												null
-	{
-		"id" : "21901",
-		"id_course" : "2910293",
-		"course_name" : "string",
-		"course_image" : "string",
-		"title" : "string",
-		"slide" : {
-			"url" : "string",
-			"status" : "string"
-		},
-		"practive" : {
-			"url" : "string",
-			"status" : "string"
-		},
-		"teacher" : "string",
-		"date" : "date",
-		"node" : "string"										x
-	}
-// table invoice 												null
-	{
-		"id" : "34701",
-		"id_user" : "574301",
-		"id_course" : "2910293",
-		"group_id" : "number",									x
-		"full_name" : "string",
-		"birth_day" : "date",
-		"address" : "string",
-		"course_name" : "string",
-		"tuition-fee" : "string",
-		"sale_of" : "number",									x
-		"total_amount" : "string",
-		"collected" : "string",									x
-		"date" : "date",										x
-		"collector" : "string"									x
-	}
+
+
+
+
+
+tbl_chapters
+
+fields 							null		type
+
+courseID									string
+title 										string
+teacher										string
+slide: {
+		url,								string
+		status								string
+		}
+practive: {
+			url, 							string
+			status							string
+		}
+date 							x			date
+note							x			string
+
+
+
+
+
+
+tbl_invoices
+
+fields 							null		type
+
+user_invoice_id								string
+totalMount									string
+collected						x			string
+data 							x			date
+
+
+
+
+
+tbl_user_invoice
+
+fields 							null		type
+
+userID										string
+courseID									string
+
+
+
+
+
+
+tbl_users
+
+fields 							null		type
+
+email										string
+password									string
+fullName									string
+birthDay									date
+sex											string
+phone										string
+address										string
+avatar										string				defaul: url image
+role										number
+courseID						x			string				là một mảng các khóa học học viên đã đăng ký
+
+
+
+
+
+
+quan hệ giữa các bảng
+
+tbl_invoices		1-1			tbl_user_invoice
+tbl_invoices		1-1			tbl_courses
+tbl_invoices		n-1			tbl_users
+tbl_courses			1-n			tbl_chapters
