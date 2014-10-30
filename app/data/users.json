@@ -1,0 +1,56 @@
+[{
+	"id" : "574301",
+	"password" : "user1",
+	"full_name" : "Nguyen Minh Quang",
+	"birth_day" : "17/02/1989",
+	"CMTND" : "135318014",
+	"email" : "nguyenminhquang172@gmail.com",
+	"phone" : "0974298943",
+	"address" : "Minh Khai - Tu Liem - HN",
+	"avatar" : "url avatar",
+	"role" : 1
+},
+{
+	"id" : "574302",
+	"password" : "user2",
+	"full_name" : "Dang Thom Lan",
+	"birth_day" : "13/02/1994",
+	"CMTND" : "13874765",
+	"email" : "landt@gmail.com",
+	"phone" : "0974298943",
+	"address" : "Minh Khai - Tu Liem - HN",
+	"role" : 1
+},
+{
+	"id" : "574303",
+	"password" : "user3",
+	"full_name" : "Nguyen Thanh Tien",
+	"birth_day" : "13/02/1994",
+	"CMTND" : "12394857",
+	"email" : "tiennt@gmail.com",
+	"phone" : "094375865",
+	"address" : "",
+	"role" : 2
+},
+{
+	"id" : "574304",
+	"password" : "user4",
+	"full_name" : "Lam Tung Tien",
+	"birth_day" : "13/02/1994",
+	"CMTND" : "12378549",
+	"email" : "tungtient@gmail.com",
+	"phone" : "016789437",
+	"address" : "Minh Khai - Tu Liem - HN",
+	"role" : 2
+},
+{
+	"id" : "574305",
+	"password" : "user5",
+	"full_name" : "admin",
+	"birth_day" : "13/02/1994",
+	"CMTND" : "12378549",
+	"email" : "admin@gmail.com",
+	"phone" : "016789437",
+	"address" : "",
+	"role" : 3
+}]

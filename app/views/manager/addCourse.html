@@ -1,0 +1,93 @@
+<div class="page ng-scope">
+    <section class="panel panel-default">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Thếm khóa học</strong></div>
+        <div class="panel-body">
+            <form name="add_course" role="form" class="ng-pristine ng-valid" novalidate data-ng-submit="submitForm()">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group" ng-class="{'has-error' : add_course.course.$invalid && !add_course.course.$pristine}">
+                            <label for="inputTitle">Khóa học</label>
+                            <input name="course" type="text" class="form-control" id="inputTitle" placeholder="Khóa học" ng-model="course.title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSubtitle">Tên con</label>
+                            <input name="subTitle" type="text" class="form-control" id="inputSubtitle" placeholder="Tên con" ng-model="course.slug">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDescription">Mô tả</label>
+                            <textarea name="" id="inputDescription" class="form-control" rows="4" placeholder="Mô tả" ng-model="course.desc"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDayLearn">Ngày học</label>
+                            <input type="text" class="form-control" id="inputDayLearn" placeholder="Ngày học" ng-model="course.dayLearn">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDateStart">Khai giảng</label>
+                            <input type="date" class="form-control" id="inputDateStart" ng-model="course.startDate">
+                        </div>
+                        <div class="form-group" ng-class="{'has-error' : add_course.subTitle.$invalid && !add_course.subTitle.$pristine}">
+                            <label for="inputLocation">Hình thức</label>
+                            <input type="text" class="form-control" id="inputLocation" placeholder="Hình thức" ng-model="course.location">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="inputTeacher">Giáo viên</label>
+                            <input name="teacher" type="text" class="form-control" id="inputTeacher" placeholder="Giáo viên" ng-model="course.teacher" required>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error' : add_course.avatar.$invalid && !add_course.avatar.$pristine}">
+                            <label for="inputIcon">Icon</label>
+                            <input name="avatar" type="url" class="form-control" id="inputIcon" placeholder="Url icon" ng-model="course.imageView" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputSummaryContents">Tóm tắt nội dung</label>
+                            <textarea name="" id="exampleInputSummaryContents" class="form-control" rows="4" placeholder="Tóm tắt nội dung" ng-model="course.summary"></textarea>
+                        </div>
+
+                        <div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputTime">Số giờ học: (giờ)</label>
+                                    <input type="number" class="form-control" id="inputTime" placeholder="0" ng-model="course.timeLearn">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputPrice">Lệ phí: (VNĐ)</label>
+                                    <input type="number" class="form-control" id="inputPrice" placeholder="0" ng-model="course.tutionFee">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputSaleOf">Giảm giá: (%)</label>
+                                    <input type="number" class="form-control" id="inputSaleOf" placeholder="0" ng-model="course.saleOf">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputNote">Ghi chú</label>
+                            <input type="text" class="form-control" id="inputNote" placeholder="Ghi chú" ng-model="course.note">
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <button type="submit"
+                        class="btn btn-success btn-w-md"
+                        ng-disabled="add_course.$invalid" ng-click="addCourse(course)">Update</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Thông báo</h3>
+    </div>
+    <div class="modal-body">
+        Thêm thành công !
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

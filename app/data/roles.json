@@ -1,0 +1,15 @@
+[{
+	"id" : "23401",
+	"code" : 1,
+	"description" : "view"
+},
+{
+	"id" : "23402",
+	"code" : 2,
+	"description" : "view, edit"
+},
+{
+	"id" : "23403",
+	"code" : 3,
+	"description" : "view, edit, add, delete"
+}]

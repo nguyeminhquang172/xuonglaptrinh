@@ -1,0 +1,112 @@
+<header class="top-header clearfix">
+
+    <!-- Logo -->
+    <div class="logo">
+        <a href="#/">
+            <!-- <span class="logo-icon glyphicon glyphicon-fire"></span> -->
+            <img src="images/logo.png" alt=""/>
+        </a>
+    </div>
+
+    <!-- needs to be put after logo to make it working-->
+    <div class="menu-button" toggle-off-canvas>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </div>
+
+    <div class="top-nav">
+        <ul class="nav-left list-unstyled">
+            <li>
+                <a href="#/" data-toggle-nav-collapsed-min
+                             class="toggle-min"
+                             id="step3"
+                             ><i class="fa fa-bars"></i></a>
+            </li>
+            <li class="dropdown">
+                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="fa fa-bell-o"></i>
+                    <!-- Hiện số Notify
+                    <span class="badge badge-info">3</span>-->
+                </a>
+                <div class="dropdown-menu with-arrow panel panel-dark">
+                    <div class="panel-heading">
+                        You have 0 notifications.
+                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <a href="javascript:;" class="media">
+                                <span class="pull-left media-icon">
+                                    <span class="btn-icon-lined btn-icon-round btn-success"><i class="fa fa-bell-o"></i></span>
+                                </span>
+                                <div class="media-body">
+                                    <span class="block">Ping Pong</span>
+                                    <span class="text-muted block">2 min ago</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="panel-footer">
+                        <a href="#">Show all notifications.</a>
+                    </div>
+                </div>
+            </li>
+            <li class="search-box visible-md visible-lg">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search text-muted"></i></span>
+                    <input type="text" class="form-control" placeholder="Search..." ng-model="course.title">
+                </div>
+            </li>
+
+
+        </ul>
+        <ul class="nav-right pull-right list-unstyled">
+            <li ng-hide="isLogined()">
+                <a ui-sref="app.login">
+                    <span data-i18n="Login"></span>
+                </a>
+            </li>
+            |
+            <li ng-hide="isLogined()">
+                <a ui-sref="app.register">
+                    <span data-i18n="Register"></span>
+                </a>
+            </li>
+            <li class="dropdown text-normal nav-profile" ng-show="isLogined()">
+                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                    <img src="images/g1.jpg" alt="" class="img-circle img30_30">
+                    <span class="hidden-xs">
+                        <span>{{userInfo.username}}</span>
+                    </span>
+                </a>
+                <ul class="dropdown-menu with-arrow pull-right">
+                    <li>
+                        <a ui-sref="app.profile">
+                            <i class="fa fa-user"></i>
+                            <span data-i18n="My Profile"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a ui-sref="app.invoices">
+                            <i class="fa fa-file-text-o"></i>
+                            <span data-i18n="Invoices"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a ui-sref="app.changePass">
+                            <i class="glyphicon glyphicon-flash"></i>
+                            <span data-i18n="Change password"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" ng-click="logout()">
+                            <i class="fa fa-sign-out"></i>
+                            <span data-i18n="Log Out"></span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+</header>

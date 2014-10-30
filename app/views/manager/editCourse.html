@@ -1,0 +1,76 @@
+<div class="page ng-scope">
+    <section class="panel panel-default">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Edit Course</strong></div>
+        <div class="panel-body">
+            <div class="row" ng-repeat="course in datas">
+                <div class="col-md-6">
+
+                    <form role="form" class="ng-pristine ng-valid">
+                        <div class="form-group">
+                            <label for="inputTitle">Tên khóa học</label>
+                            <input type="text" class="form-control" id="inputTitle" placeholder="Title" ng-model="{{course.title}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSubtitle">Tên con</label>
+                            <input type="text" class="form-control" id="inputSubtitle" placeholder="Subtitle" ng-model="course.subtitle">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDescription">Mô tả</label>
+                            <textarea name="" id="inputDescription" class="form-control" rows="4" placeholder="Descriptions" ng-model="course.description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDayLearn">Các buổi học</label>
+                            <input type="text" class="form-control" id="inputDayLearn" placeholder="Day Learn" ng-model="course.day_learn">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDateStart">Khai giảng</label>
+                            <input type="text" class="form-control" id="inputDateStart" placeholder="Khai giảng" ng-model="course.start_date">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-w-md">Submit</button>
+
+                </div>
+                <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="inputTeacher">Giáo viên</label>
+                            <input type="text" class="form-control" id="inputTeacher" placeholder="Giáo viên" ng-model="course.teacher">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputIcon">Ảnh đại diện</label>
+                            <input type="text" class="form-control" id="inputIcon" placeholder="Url icon" ng-model="course.image_view">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputSummaryContents">Nội dung tổng quát</label>
+                            <textarea name="" id="exampleInputSummaryContents" class="form-control" rows="4" placeholder="summary contents" ng-model="course.summary"></textarea>
+                        </div>
+
+                        <div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputTime">Số giờ học: (giờ)</label>
+                                    <input type="number" class="form-control" id="inputTime" placeholder="0" ng-model="course.time_learn">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputPrice">Lệ phí: (VNĐ)</label>
+                                    <input type="number" class="form-control" id="inputPrice" placeholder="0" ng-model="course.tuition_fee">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="inputSaleOf">Giảm giá: (%)</label>
+                                    <input type="number" class="form-control" id="inputSaleOf" placeholder="0" ng-model="course.sale_of">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputNote">Ghi chú</label>
+                            <input type="text" class="form-control" id="inputNote" placeholder="Ghi chú" ng-model="course.note">
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

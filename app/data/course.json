@@ -1,0 +1,51 @@
+	[{
+		"id" : "2910293",
+		"title" : "node js",
+		"subtitle" : "CORE LANGUAGE DEVELOP",
+		"description" : "Sau khoa hoc nay cac ban co the xay dung hoan chinh mot server co ban bang nodejs Sau khoa hoc nay cac ban co the xay dung hoan chinh mot server co ban bang nodejs Sau khoa hoc nay cac ban co the xay dung hoan chinh mot server co ban bang nodejs Sau khoa hoc nay cac ban co the xay dung hoan chinh mot server co ban bang nodejs Sau khoa hoc nay cac ban co the xay dung hoan chinh mot server co ban bang nodejs Sau khoa hoc nay cac ban co the xay dung hoan chinh mot server co ban bang nodejs Sau khoa hoc nay cac ban co the xay dung hoan chinh mot server co ban bang nodejs",
+		"summary" : "SocketIO, files",
+		"image_view" : "http://localhost:9000/images/courses/js.png",
+		"teacher" : "Nguyen Thanh Tien",
+		"time_learn" : 40,
+		"tuition_fee" : 4500000,
+		"sale_of" : 10,
+		"day_learn" : "2-4-6",
+		"start_time" : "19h30",
+		"start_date" : "22/8/2014",
+		"note" : "giảm 10% cho nhóm 5 người"
+
+	},
+	{
+		"id" : "2910294",
+		"title" : "Angular js",
+		"subtitle" : "CORE LANGUAGE DEVELOP",
+		"description" : "Sau khoa hoc nay cac ban co the xay dung mot fontend dung angular, angular tuong tac voi du lieu",
+		"summary" : "factory, directive, module",
+		"image_view" : "http://localhost:9000/images/courses/js.png",
+		"teacher" : "Nguyen Thanh Tien",
+		"time_learn" : 40,
+		"tuition_fee" : 4500000,
+		"sale_of" : 10,
+		"day_learn" : "3-5-7",
+		"start_time" : "19h30",
+		"start_date" : "23/8/2014",
+		"note" : "giảm 10% cho nhóm 5 người"
+
+	},
+	{
+		"id" : "2910295",
+		"title" : "Ionic",
+		"subtitle" : "CORE LANGUAGE DEVELOP",
+		"description" : "Sau khoa hoc nay cac ban co the xay dung mot ung dung mobile chi su dung js va html, css",
+		"summary" : "Android, IOs",
+		"image_view" : "http://localhost:9000/images/courses/js.png",
+		"teacher" : "Nguyen Thanh Tien",
+		"time_learn" : 40,
+		"tuition_fee" : 4500000,
+		"sale_of" : 10,
+		"day_learn" : "CN",
+		"start_time" : "19h30",
+		"start_date" : "28/8/2014",
+		"note" : "giảm 10% cho nhóm 5 người"
+
+	}]

@@ -1,0 +1,98 @@
+// table role
+	{
+		"id" : "23401",
+		"code" : "number",
+		"description" : "string"
+	},
+	{
+		"id" : "23402",
+		"code" : "number",
+		"description" : "string"
+	},
+	{
+		"id" : "23403",
+		"code" : "number",
+		"description" : "string"
+	}
+
+// table user 													null
+	{
+		"id" : "574301",
+		"email" : "string",
+		"password" : "string",
+		"full_name" : "string",
+		"birth_day" : "date",
+		"CMTND" : "string",										x
+		"phone" : "string",
+		"address" : "string",
+		"avatar" : "string",									x
+		"role" : "number"
+	}
+
+	{
+  "fullName": "",
+  "birthday": "",
+  "phone": "",
+  "Addr": "",
+  "avatar": "",
+  "email": "",
+  "created": "",
+  "lastUpdated": ""
+}
+
+// table courses 												null
+	{
+		"id" : "2910293",
+		"title" : "string",
+		"subtitle" : "string",									x
+		"description" : "string",
+		"summary" : "string",
+		"image_view" : "string",
+		"teacher" : "string",
+		"time_learn" : "number",
+		"tuition-fee" : "string",
+		"sale_of" : "number",									x
+		"day_learn" : "string",									x
+		"start_time" : "string",								x
+		"start_date" : "string",								x
+		"note" : "string",										x
+		"location" : "string"
+
+	}
+
+// table session 												null
+	{
+		"id" : "21901",
+		"id_course" : "2910293",
+		"course_name" : "string",
+		"course_image" : "string",
+		"title" : "string",
+		"slide" : {
+			"url" : "string",
+			"status" : "string"
+		},
+		"practive" : {
+			"url" : "string",
+			"status" : "string"
+		},
+		"teacher" : "string",
+		"date" : "date",
+		"node" : "string"										x
+	}
+// table invoice 												null
+	{
+		"id" : "34701",
+		"id_user" : "574301",
+		"id_course" : "2910293",
+		"group_id" : "number",									x
+		"full_name" : "string",
+		"birth_day" : "date",
+		"address" : "string",
+		"course_name" : "string",
+		"tuition-fee" : "string",
+		"sale_of" : "number",									x
+		"total_amount" : "string",
+		"collected" : "string",									x
+		"date" : "date",										x
+		"collector" : "string"									x
+	}

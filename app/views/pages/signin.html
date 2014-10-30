@@ -1,0 +1,47 @@
+<div class="page-signin">
+
+    <div class="signin-header">
+        <section class="logo text-center">
+            <a href="#/">{{main.brand}}</a>
+        </section>
+    </div>
+
+    <div class="signin-body">
+        <div class="container">
+            <div class="form-container">
+
+                <form name="login" class="form-horizontal" novalidate>
+                    <fieldset>
+                        <div class="form-group" ng-class="{'has-error' : login.email.$invalid && !login.email.$pristine}">
+                            <div class="btn-icon-lined btn-icon-round btn-icon-sm btn-default-light">
+                                <span class="glyphicon glyphicon-envelope"></span>
+                            </div>
+                            <input type="text" name="email"
+                                   class="form-control input-lg input-round text-center"
+                                   placeholder="Email"
+                                   ng-model="user.username" required />
+                        </div>
+                        <div class="form-group" ng-class="{'has-error' : login.password.$invalid && !login.password.$pristine}">
+                            <div class="btn-icon-lined btn-icon-round btn-icon-sm btn-default-light">
+                                <span class="glyphicon glyphicon-lock"></span>
+                            </div>
+                            <input type="password" name="password"
+                                   class="form-control input-lg input-round text-center"
+                                   placeholder="Password"
+                                   ng-model="user.password" required />
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-lg btn-round btn-block text-center" ng-click="userLogin(user)" ng-disabled="login.$invalid">Đăng nhập</button>
+                        </div>
+                    </fieldset>
+                </form>
+
+                <section>
+                    <p class="text-center"><a ui-sref="app.forgotPass">Bạn quên mật khẩu ?</a></p>
+                    <p class="text-center text-muted text-small">Bạn chưa có tài khoản ? <a ui-sref="app.register">Sign up</a></p>
+                </section>
+            </div>
+        </div>
+    </div>
+
+</div>

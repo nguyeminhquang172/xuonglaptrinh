@@ -1,0 +1,20 @@
+.addNew {
+	padding: 0 0 10px;
+}
+
+.course tbody:not(:last-child) tr td:first-child{
+	width: 30%;
+}
+
+.has-error {
+	border-coler: red;
+	color: red;
+}
+
+.form-group i {
+	color: red;
+}
+
+.logo a img {
+	height: 50px;
+}

@@ -1,0 +1,72 @@
+<div class="col-md-6" ng-repeat="course in datas | filter:searchText">
+    <div class="panel panel-profile">
+        <div class="panel-heading bg-success clearfix">
+            <a href="" class="pull-left profile">
+                <img alt="" src="{{course.image_view}}" class="img-circle img80_80">
+            </a>
+            <h3>{{course.title}}{{searchText}}</h3>
+            <p>{{course.subtitle}}</p>
+        </div>
+        <section class="table-flip-scroll">
+            <table class="table table-bordered course">
+              <tbody>
+                <tr>
+                  <td>Kết quả sau khóa học</td>
+                  <td>{{course.description}}</td>
+                </tr>
+                <tr>
+                  <td>Nội dung Chính</td>
+                  <td>{{course.summary}}</td>
+                </tr>
+                <tr>
+                  <td>Người hướng dẫn</td>
+                  <td>{{course.teacher}}</td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td>Số giờ học</td>
+                    <td>{{course.time_learn}} giờ</td>
+                </tr>
+                <tr>
+                    <td>Buổi học: </td>
+                    <td>{{course.day_learn}}</td>
+                </tr>
+                <tr>
+                  <td>Lệ phí: </td>
+                  <td>{{course.tuition_fee}} VNĐ</td>
+                </tr>
+                <tr>
+                    <td>Khuyến mãi: </td>
+                    <td>{{course.sale_of}} %</td>
+                </tr>
+                <tr>
+                  <td>Khai giảng: </td>
+                  <td>{{course.start_date}}</td>
+                </tr>
+                <tr>
+                    <td>giờ học: </td>
+                    <td>{{course.start_time}}</td>
+                </tr>
+                <tr>
+                  <td>Lưu ý</td>
+                  <td>{{course.note}}</td>
+                </tr>
+                </tbody>
+                <tbody>
+                <tr>
+                    <td colspan="2">
+                        <a ui-sref="app.session({courseId: '{{course.id}}' })"><button class="btn btn-success"><span class="glyphicon glyphicon-eye-open"></span> Xem nội dung</button></a>
+                        <a ui-sref="register" ng-show="isLogined()"><button class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Đăng ký</button></a>
+                        <!-- <a ui-sref="editCourse"><button class="btn btn-success" ng-click="getId(course.id)"><span class="glyphicon glyphicon-edit"></span> Sửa</button></a>
+                        <a ui-sref="viewListChild"><button class="btn btn-success"><span class="glyphicon glyphicon-cog"></span> Quản lý</button></a>
+                        <button-delete></btn-delete> -->
+                        <!-- <a ui-sref="coursesDetail"><button class="btn btn-success"><span class="glyphicon glyphicon-trash"></span></button></a> -->
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+        </section>
+    </div>
+</div>
+    <pagination class="pagination-sm" direction-links="true" total-items="totalItems" ng-model="course" num-pages="smallnumPages" previous-text="&lsaquo;" next-text="&rsaquo;"></pagination>

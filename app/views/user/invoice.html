@@ -1,0 +1,60 @@
+<div ui-view></div>
+<div class="page page-invoice">
+
+    <div class="invoice-wrapper">
+        <section class="invoice-container" id="invoice">
+
+            <div class="invoice-inner">
+                <div class="row">
+                    <div class="col-xs-6 text-right">
+                        <p class="size-h2">INVOICE NO. #00105</p>
+                        <p>21st August 2014</p>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-xs-6">
+                        <p><strong>Học viên:</strong></p>
+                        <p><strong>Ngày sinh:</strong></p>
+                        <p><strong>Giới tính:</strong></p>
+                        <p><strong>Địa chỉ:</strong></p>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <p><strong>Order Details:</strong></p>
+                    </div>
+                </div>
+
+                <div class="divider divider-lg"></div>
+
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr class="bg-dark">
+                        <th class="text-center">#</th>
+                        <th>Khóa học</th>
+                        <th class="text-center">Học phí</th>
+                        <th class="text-center">Giảm</th>
+                        <th class="text-center">Tổng</th>
+                        <th class="text-center">Đã thu</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="text-center">{{$index}}</td>
+                        <td>{{dataInvoice.detail.course}}</td>
+                        <td class="text-center">{{dataInvoice.detail.unitCost}}</td>
+                        <td class="text-center">{{dataInvoice.detail.discounts}}</td>
+                        <td class="text-center">{{dataInvoice.detail.total}}</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="text-center no-print">
+            <a href="" ng-click="printInvoice()" class="btn btn-primary btn-lg btn-w-lg"><i class="fa fa-print"></i> Print</a>
+        </section>
+    </div>
+</div>

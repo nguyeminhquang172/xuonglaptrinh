@@ -1,0 +1,77 @@
+<!doctype html>
+<!--[if lt IE 8]>         <html class="no-js lt-ie8"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+        <title>[Lab Coder] Less code - More software !</title>
+        <meta name="description" content="Responsive Admin Web App">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+        <!-- Needs images, font... therefore can not be part of main.css -->
+        <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+        <!-- end Needs images -->
+
+
+            <!-- build:css({.tmp,client}) styles/main.css -->
+            <link rel="stylesheet" href="styles/bootstrap.css">
+            <link rel="stylesheet" href="styles/ui.css">
+            <link rel="stylesheet" href="styles/main.css">
+            <link rel="stylesheet" href="styles/xuonglaptrinh.css">
+            <!-- endbuild -->
+            <style>
+            /* .fade.in {
+                opacity: 1;
+                background: none;
+                width: 100%;
+            } */
+            </style>
+    </head>
+    <!-- build:js scripts/vendor.js -->
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/angular-local-storage/angular-local-storage.js"></script>
+        <script src="bower_components/angular-route/angular-route.min.js"></script>
+        <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+        <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <!-- endbuild -->
+    <body data-ng-app="app"
+          id="app"
+          class="app"
+          data-custom-page
+          data-off-canvas-nav
+          data-ng-controller="AppCtrl"
+          data-ng-class=" {'layout-boxed': admin.layout === 'boxed' } "
+          >
+        <section >
+          <div ui-view="header" id="header" class="header-container " data-ng-class=" {'header-fixed': admin.fixedHeader} "></div>
+        </section>
+        <div class="main-container">
+          <aside id="nav-container"
+            class="nav-container"
+            data-ng-class=" {'nav-horizontal': admin.menu === 'horizontal', 'nav-vertical': admin.menu === 'vertical'}">
+            <div ui-view="navbar" ></div>
+          </aside>
+          <aside ui-view="mainContain" id="content" class="content-container"></aside>
+        </div>
+        <!-- endbuild -->
+
+        <!-- build:js({.tmp,client}) scripts/app.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/configs/routing-config.js"></script>
+        <script src="scripts/shared/localize.js"></script>
+        <script src="scripts/shared/main.js"></script>
+        <script src="scripts/shared/Nav.js"></script>
+        <!--Add cho Lab Coder-->
+        <!--<script src="scripts/User/profile.js"></script>-->
+        <script src="scripts/controllers/courses.js"></script>
+        <script src="scripts/controllers/invoice.js"></script>
+        <script src="scripts/Form/FormCtrl.js"></script>
+        <script src="scripts/Form/FormValidation.js"></script>
+        <script src="scripts/Page/PageCtrl.js"></script>
+        <script src="scripts/UI/UIDirective.js"></script>
+        <script src="scripts/UI/UIService.js"></script>
+        <!-- endbuild -->
+    </body>
+</html>

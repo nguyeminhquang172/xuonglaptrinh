@@ -1,0 +1,71 @@
+<div class="col-md-6">
+    <div class="panel panel-profile">
+        <div class="panel-heading bg-success clearfix">
+            <a href="" class="pull-left profile">
+                <img alt="" src="{{datas.image_view}}" class="img-circle img80_80">
+            </a>
+            <h3>{{datas.title}}{{searchText}}</h3>
+            <p>{{datas.subtitle}}</p>
+        </div>
+        <section class="table-flip-scroll">
+            <table class="table table-bordered datas">
+              <tbody>
+                <tr>
+                  <td>Kết quả sau khóa học</td>
+                  <td>{{datas.description}}</td>
+                </tr>
+                <tr>
+                  <td>Nội dung Chính</td>
+                  <td>{{datas.summary}}</td>
+                </tr>
+                <tr>
+                  <td>Người hướng dẫn</td>
+                  <td>{{datas.teacher}}</td>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <td>Số giờ học</td>
+                    <td>{{datas.time_learn}} giờ</td>
+                </tr>
+                <tr>
+                    <td>Buổi học: </td>
+                    <td>{{datas.day_learn}}</td>
+                </tr>
+                <tr>
+                  <td>Lệ phí: </td>
+                  <td>{{datas.tuition_fee}} VNĐ</td>
+                </tr>
+                <tr>
+                    <td>Khuyến mãi: </td>
+                    <td>{{datas.sale_of}} %</td>
+                </tr>
+                <tr>
+                  <td>Khai giảng: </td>
+                  <td>{{datas.start_date}}</td>
+                </tr>
+                <tr>
+                    <td>giờ học: </td>
+                    <td>{{datas.start_time}}</td>
+                </tr>
+                <tr>
+                  <td>Lưu ý</td>
+                  <td>{{datas.note}}</td>
+                </tr>
+                </tbody>
+                <tbody>
+                <tr>
+                    <td colspan="2">
+                        <a ui-sref="app.session({datasId: '{{datas.id}}' })"><button class="btn btn-success"><span class="glyphicon glyphicon-eye-open"></span> Xem nội dung</button></a>
+                        <a ui-sref="register" ng-show="isLogined()"><button class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Đăng ký</button></a>
+                        <!-- <a ui-sref="editdatas"><button class="btn btn-success" ng-click="getId(datas.id)"><span class="glyphicon glyphicon-edit"></span> Sửa</button></a>
+                        <a ui-sref="viewListChild"><button class="btn btn-success"><span class="glyphicon glyphicon-cog"></span> Quản lý</button></a>
+                        <button-delete></btn-delete> -->
+                        <!-- <a ui-sref="datassDetail"><button class="btn btn-success"><span class="glyphicon glyphicon-trash"></span></button></a> -->
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+        </section>
+    </div>
+</div>

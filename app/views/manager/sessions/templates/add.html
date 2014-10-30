@@ -1,0 +1,70 @@
+<div class="modal-body">
+    <section class="panel panel-default">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Thêm buổi học</strong></div>
+        <div class="panel-body">
+            <form name="add_session" role="form" class="ng-pristine ng-valid" novalidate data-ng-submit="submitForm()">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- <div class="form-group" ng-class="{'has-error' : add_session.courseName.$invalid && !add_session.courseName.$pristine}">
+                            <label for="inputTitle">Khóa học</label><br/>
+                            <select name="courseName" ng-model="session.title" ng-options="session.title for session in arrCourse" class="form-control">
+                                <option value="">-- Chọn một khóa học --</option>
+                            </select>
+                        </div> -->
+                        <div class="form-group">
+                            <label for="inputSession">Khóa học</label>
+                            <input name="session_title" type="text" ng-model="courseTitle" class="form-control" id="inputSession" placeholder="Tên buổi học" ng-readonly="true">
+                            <input type="hidden" ng-model="session.courseID">
+                        </div>
+                        <div class="form-group" ng-class="{'has-error' : add_session.session_title.$invalid && !add_session.session_title.$pristine}">
+                            <label for="inputSession">Tên buổi học</label>
+                            <input name="session_title" type="text" class="form-control" id="inputSession" placeholder="Tên buổi học" ng-model="session.title" required>
+                        </div>
+                        <div class="form-group">
+                            <div class="row-fluid"><label for="inputSlideUrl">Bài giảng</label></div>
+                            <div class="row">
+                                <div class="col-md-6"><input type="text" name="" id="inputSlideUrl" class="form-control" placeholder="Link tải bài giảng" ng-model="session.slide.url"></div>
+                                <div class="col-md-6"><input type="text" name="" id="inputSlideUrl" class="form-control" placeholder="Trạng thái" ng-model="session.slide.status"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row-fluid"><label for="inputPractive">Bài tập</label></div>
+                            <div class="row">
+                                <div class="col-md-6"><input type="text" class="form-control" id="inputPractive" placeholder="Link tải bài tập" ng-model="session.practive.url"></div>
+                                <div class="col-md-6"><input type="text" class="form-control" id="inputPractive" placeholder="Trạng thái" ng-model="session.practive.status"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="inputTeacher">Giáo viên</label>
+                            <input type="text" class="form-control" id="inputTeacher" placeholder="Giáo viên" ng-model="session.teacher">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputDate">Date</label>
+                            <input type="date" class="form-control" id="inputDate" ng-model="session.dateSession">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputNode">Ghi chú</label>
+                            <input type="text" class="form-control" id="inputNode" placeholder="Ghi chú" ng-model="session.note">
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <button type="submit" class="btn btn-primary btn-w-md" ng-disabled="add_session.$invalid" ng-click="addSession(session)">Thêm mới</button>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Message</h3>
+    </div>
+    <div class="modal-body">
+        Thêm mới buổi học thành công !
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning" ng-click="cancel('back')">Về trang trước</button>
+    </div>
+</script>

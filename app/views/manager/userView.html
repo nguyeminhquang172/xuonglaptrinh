@@ -1,0 +1,93 @@
+<div class="modal-header">
+            <h3 class="modal-title">Thông tin học viên</h3>
+        </div>
+        <div class="modal-body">
+            <section class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form role="form" class="ng-pristine ng-valid">
+                                <div class="form-group">
+                                    <label for="inputUserName">Khóa học</label>
+                                    <div>
+                                        <span class="ui-select">
+                                        <select class="form-control">
+                                            <option value="Mustard">Mustard</option>
+                                            <option value="Ketchup">Ketchup</option>
+                                            <option value="Barbecue">Barbecue</option>
+                                        </select>
+                                    </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputUserName">Tên đăng nhập</label>
+                                    <input type="text" class="form-control" id="inputUserName" placeholder="Tên đăng nhập" ng-model="user.userName">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPass">Mật khẩu</label>
+                                    <input type="password" class="form-control" id="inputPass" placeholder="Mật khẩu" ng-model="user.userPass">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputFullName">Họ và Tên</label>
+                                    <input type="text" class="form-control" id="inputFullName" placeholder="Họ và Tên" ng-model="user.fullName">
+                                </div>
+                        </div>
+                        <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputBirthDay">Ngày sinh</label>
+                                    <!-- date time picker -->
+                                    <input type="text" class="form-control" id="inputEmail" placeholder="birth day" ng-model="user.email">
+                                    <!-- date time picker -->
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail">Email</label>
+                                    <input type="text" class="form-control" id="inputEmail" placeholder="Email" ng-model="user.email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputAddress">Địa chỉ</label>
+                                    <input type="text" class="form-control" id="inputAddress" placeholder="Địa chỉ" ng-model="user.address">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPhone">Điện thoại</label>
+                                    <input type="text" class="form-control" id="inputPhone" placeholder="Điện thoại" ng-model="user.phone">
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-heading"><strong>Khóa học đăng ký</strong></div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form role="form" class="ng-pristine ng-valid">
+                                <div class="form-group">
+                                    <label for="inputUserName">Khóa học: </label>nodejs, angular
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputBirthDay">Đã thu: </label>
+                                    <!-- date time picker -->
+                                    <input type="text" class="form-control" id="inputEmail" placeholder="Đã thu" ng-model="user.email">
+                                    <!-- date time picker -->
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-w-md">Update</button>
+                        </div>
+                        <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="inputUserName">Thành tiền: </label>5.500.000 VNĐ
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputEmail">Còn nợ: </label>
+                                    <input type="text" class="form-control" id="inputEmail" placeholder="Còn nợ" ng-model="user.email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputBirthDay">Ngày thu</label>
+                                    <date-time-picker></date-time-picker>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>

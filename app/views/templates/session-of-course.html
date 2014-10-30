@@ -1,0 +1,39 @@
+<div class="col-md-6" ng-repeat="session in datas">
+    <div class="panel panel-profile">
+        <div class="panel-heading bg-success clearfix">
+            <a href="" class="pull-left profile">
+                <img alt="" src="{{session.course_image}}" class="img-circle img80_80">
+            </a>
+
+            <h3>{{session.session_name}}</h3>
+
+            <p>{{session.course_name}}</p>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <span class="badge badge-primary" ng-model="session.slide.status">{{session.slide.status}}</span>
+                <i class="fa fa-cloud-download"></i>
+                <a href="#" ng-hide="session.slide.status !== 'public'">{{session.slide.url}}</a>
+                <span ng-hide="session.slide.status == 'public'">Đăng ký khóa học để tải tài liệu này</span>
+            </li>
+            <li class="list-group-item">
+                <span class="badge badge-primary">{{session.practive.status}}</span>
+                <i class="fa fa-cloud-download"></i>
+                <a href="#" ng-hide="session.practive.status !== 'public'">{{session.practive.url}}</a>
+                <span ng-hide="session.practive.status == 'public'">Đăng ký khóa học để tải tài liệu này</span>
+            </li>
+            <li class="list-group-item">
+                <i class="fa fa-user"></i>
+                {{session.teacher}}
+            </li>
+            <li class="list-group-item">
+                <i class="fa fa-calendar-o"></i>
+                {{session.date}}
+            </li>
+            <li class="list-group-item">
+                <i class="fa fa-comment-o"></i>
+                {{session.note}}
+            </li>
+        </ul>
+    </div>
+</div>

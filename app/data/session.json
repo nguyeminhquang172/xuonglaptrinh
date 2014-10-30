@@ -1,0 +1,231 @@
+[{
+	"id" : "21901",
+	"id_course" : "2910293",
+	"course_name" : "node js",
+	"course_image" : "http://localhost:9000/images/courses/js.png",
+	"session_name" : "session 1",
+	"slide" :
+		{
+			"url" : "url slide",
+			"status" : "private"
+		},
+	"practive" :
+		{
+			"url" : "url practive",
+			"status" : "public"
+		},
+	"teacher" : "Nguyen Minh Quang",
+	"date" : "22-10-2014",
+	"note" : "moi nguoi chu y doc slide truoc de co buoi hoc duoc hieu qua hon"
+},
+{
+	"id" : "21902",
+	"id_course" : "2910293",
+	"course_name" : "node js",
+	"course_image" : "http://localhost:9000/images/courses/js.png",
+	"session_name" : "session 2",
+	"slide" :
+		{
+			"url" : "url slide",
+			"status" : "private"
+		},
+	"practive" :
+		{
+			"url" : "url practive",
+			"status" : "public"
+		},
+	"status" : "private",
+	"teacher" : "Nguyen Minh Quang",
+	"date" : "22-10-2014",
+	"note" : "moi nguoi chu y doc slide truoc de co buoi hoc duoc hieu qua hon"
+},
+{
+	"id" : "21903",
+	"id_course" : "2910293",
+	"course_name" : "node js",
+	"course_image" : "http://localhost:9000/images/courses/js.png",
+	"session_name" : "session 3",
+	"slide" :
+		{
+			"url" : "url slide",
+			"status" : "private"
+		},
+	"practive" :
+		{
+			"url" : "url practive",
+			"status" : "public"
+		},
+	"status" : "private",
+	"teacher" : "Nguyen Minh Quang",
+	"date" : "22-10-2014",
+	"note" : "moi nguoi chu y doc slide truoc de co buoi hoc duoc hieu qua hon"
+},
+{
+	"id" : "21904",
+	"id_course" : "2910293",
+	"course_name" : "node js",
+	"course_image" : "http://localhost:9000/images/courses/js.png",
+	"session_name" : "session 4",
+	"slide" :
+		{
+			"url" : "url slide",
+			"status" : "private"
+		},
+	"practive" :
+		{
+			"url" : "url practive",
+			"status" : "public"
+		},
+	"status" : "private",
+	"teacher" : "Nguyen Minh Quang",
+	"date" : "22-10-2014",
+	"note" : "moi nguoi chu y doc slide truoc de co buoi hoc duoc hieu qua hon"
+},
+{
+	"id" : "21905",
+	"id_course" : "2910293",
+	"course_name" : "node js",
+	"course_image" : "http://localhost:9000/images/courses/js.png",
+	"session_name" : "session 5",
+	"slide" :
+		{
+			"url" : "url slide",
+			"status" : "private"
+		},
+	"practive" :
+		{
+			"url" : "url practive",
+			"status" : "public"
+		},
+	"status" : "public",
+	"teacher" : "Nguyen Minh Quang",
+	"date" : "22-10-2014",
+	"note" : "moi nguoi chu y doc slide truoc de co buoi hoc duoc hieu qua hon"
+},
+{
+	"id" : "21906",
+	"id_course" : "2910294",
+	"course_name" : "Angular",
+	"course_image" : "http://localhost:9000/images/courses/js.png",
+	"session_name" : "session 1",
+	"slide" :
+		{
+			"url" : "url slide",
+			"status" : "private"
+		},
+	"practive" :
+		{
+			"url" : "url practive",
+			"status" : "public"
+		},
+	"status" : "private",
+	"teacher" : "Nguyen Minh Quang",
+	"date" : "22-10-2014",
+	"note" : "moi nguoi chu y doc slide truoc de co buoi hoc duoc hieu qua hon"
+},
+{
+	"id" : "21907",
+	"id_course" : "2910294",
+	"course_name" : "Angular",
+	"course_image" : "http://localhost:9000/images/courses/js.png",
+	"session_name" : "session 2",
+	"slide" :
+		{
+			"url" : "url slide",
+			"status" : "private"
+		},
+	"practive" :
+		{
+			"url" : "url practive",
+			"status" : "public"
+		},
+	"status" : "public",
+	"teacher" : "Nguyen Minh Quang",
+	"date" : "22-10-2014",
+	"note" : "moi nguoi chu y doc slide truoc de co buoi hoc duoc hieu qua hon"
+},
+{
+	"id" : "21908",
+	"id_course" : "2910294",
+	"course_name" : "Angular",
+	"course_image" : "http://localhost:9000/images/courses/js.png",
+	"session_name" : "session 3",
+	"slide" :
+		{
+			"url" : "url slide",
+			"status" : "private"
+		},
+	"practive" :
+		{
+			"url" : "url practive",
+			"status" : "public"
+		},
+	"status" : "public",
+	"teacher" : "Nguyen Minh Quang",
+	"date" : "22-10-2014",
+	"note" : "moi nguoi chu y doc slide truoc de co buoi hoc duoc hieu qua hon"
+},
+{
+	"id" : "21909",
+	"id_course" : "2910294",
+	"course_name" : "Angular",
+	"course_image" : "http://localhost:9000/images/courses/js.png",
+	"session_name" : "session 4",
+	"slide" :
+		{
+			"url" : "url slide",
+			"status" : "private"
+		},
+	"practive" :
+		{
+			"url" : "url practive",
+			"status" : "public"
+		},
+	"status" : "public",
+	"teacher" : "Nguyen Minh Quang",
+	"date" : "22-10-2014",
+	"note" : "moi nguoi chu y doc slide truoc de co buoi hoc duoc hieu qua hon"
+},
+{
+	"id" : "219010",
+	"id_course" : "2910294",
+	"course_name" : "Angular",
+	"course_image" : "http://localhost:9000/images/courses/js.png",
+	"session_name" : "session 5",
+	"slide" :
+		{
+			"url" : "url slide",
+			"status" : "private"
+		},
+	"practive" :
+		{
+			"url" : "url practive",
+			"status" : "public"
+		},
+	"status" : "private",
+	"teacher" : "Nguyen Minh Quang",
+	"date" : "22-10-2014",
+	"note" : "moi nguoi chu y doc slide truoc de co buoi hoc duoc hieu qua hon"
+},
+{
+	"id" : "219010",
+	"id_course" : "2910295",
+	"course_name" : "Ionic",
+	"course_image" : "http://localhost:9000/images/courses/js.png",
+	"session_name" : "session 1",
+	"slide" :
+		{
+			"url" : "url slide",
+			"status" : "private"
+		},
+	"practive" :
+		{
+			"url" : "url practive",
+			"status" : "public"
+		},
+	"status" : "private",
+	"teacher" : "Nguyen Minh Quang",
+	"date" : "22-10-2014",
+	"note" : "moi nguoi chu y doc slide truoc de co buoi hoc duoc hieu qua hon"
+}
+]

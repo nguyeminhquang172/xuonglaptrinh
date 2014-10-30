@@ -1,0 +1,39 @@
+<div class="col-md-6">
+    <div class="panel panel-profile">
+        <div class="panel-heading bg-success clearfix">
+            <a href="" class="pull-left profile">
+                <img alt="" src="{{datas.course_image}}" class="img-circle img80_80">
+            </a>
+
+            <h3>{{datas.datas_name}}</h3>
+
+            <p>{{datas.course_name}}</p>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <span class="badge badge-primary" ng-model="datas.slide.status">{{datas.slide.status}}</span>
+                <i class="fa fa-cloud-download"></i>
+                <a href="#" ng-hide="datas.slide.status !== 'public'">{{datas.slide.url}}</a>
+                <span ng-hide="datas.slide.status == 'public'">Đăng ký khóa học để tải tài liệu này</span>
+            </li>
+            <li class="list-group-item">
+                <span class="badge badge-primary">{{datas.practive.status}}</span>
+                <i class="fa fa-cloud-download"></i>
+                <a href="#" ng-hide="datas.practive.status !== 'public'">{{datas.practive.url}}</a>
+                <span ng-hide="datas.practive.status == 'public'">Đăng ký khóa học để tải tài liệu này</span>
+            </li>
+            <li class="list-group-item">
+                <i class="fa fa-user"></i>
+                {{datas.teacher}}
+            </li>
+            <li class="list-group-item">
+                <i class="fa fa-calendar-o"></i>
+                {{datas.date}}
+            </li>
+            <li class="list-group-item">
+                <i class="fa fa-comment-o"></i>
+                {{datas.note}}
+            </li>
+        </ul>
+    </div>
+</div>

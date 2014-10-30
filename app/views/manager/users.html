@@ -1,0 +1,74 @@
+<div class="page page-invoice">
+    <div class="invoice-wrapper">
+        <section class="invoice-container" id="invoice">
+            <div class="invoice-inner">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr class="bg-dark">
+                        <th class="text-center">#</th>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Course</th>
+                        <th class="text-center">So tien da nop</th>
+                        <th class="text-center">So tien con no</th>
+                        <th class="text-center">Ngày đăng ký</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="text-center">1</td>
+                        <td class="text-center">35</td>
+                        <td class="text-center">{{dataInvoice.detail.discounts}}</td>
+                        <td class="text-center">{{dataInvoice.detail.total}}</td>
+                        <td class="text-center">{{dataInvoice.detail.total}}</td>
+                        <td class="text-center">{{dataInvoice.detail.total}}</td>
+                        <th class="text-center">
+                            <a ui-sref="viewUser" class="btn-icon bg-success"><i class="glyphicon glyphicon-eye-open"></i></a>
+                            <a href="javascript:;" class="btn-icon bg-success" ng-click="open()"><i class="glyphicon glyphicon-trash"></i></a>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td class="text-center">1</td>
+                        <td class="text-center">35</td>
+                        <td class="text-center">{{dataInvoice.detail.discounts}}</td>
+                        <td class="text-center">{{dataInvoice.detail.total}}</td>
+                        <td class="text-center">{{dataInvoice.detail.total}}</td>
+                        <td class="text-center">{{dataInvoice.detail.total}}</td>
+                        <th class="text-center">
+                            <a ui-sref="viewUser" class="btn-icon bg-success"><i class="glyphicon glyphicon-eye-open"></i></a>
+                            <a href="javascript:;" class="btn-icon bg-success" ng-click="open()"><i class="glyphicon glyphicon-trash"></i></a>
+                        </th>
+                    </tr>
+                    <tr>
+                        <td class="text-center">1</td>
+                        <td class="text-center">35</td>
+                        <td class="text-center">{{dataInvoice.detail.discounts}}</td>
+                        <td class="text-center">{{dataInvoice.detail.total}}</td>
+                        <td class="text-center">{{dataInvoice.detail.total}}</td>
+                        <td class="text-center">{{dataInvoice.detail.total}}</td>
+                        <th class="text-center">
+                             <a ui-sref="viewUser" class="btn-icon bg-success"><i class="glyphicon glyphicon-eye-open"></i></a>
+                            <a href="javascript:;" class="btn-icon bg-success" ng-click="open()"><i class="glyphicon glyphicon-trash"></i></a>
+                        </th>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Xác thực</h3>
+    </div>
+    <div class="modal-body">
+        Bạn có chắc chắn muốn xóa bản ghi này ?
+        Selected: <b>{{ selected.item }}</b>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

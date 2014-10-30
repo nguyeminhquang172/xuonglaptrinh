@@ -1,0 +1,52 @@
+<div class="page ng-scope">
+    <section class="panel panel-default">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Danh sách hóa đơn</strong></div>
+       <div class="panel-body">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr class="bg-dark">
+                    <th class="text-center">#</th>
+                    <th class="text-center">Studen</th>
+                    <th class="text-center">Birth day</th>
+                    <th class="text-center">Course</th>
+                    <th class="text-center">Total amount</th>
+                    <th class="text-center">Collected</th>
+                    <th class="text-center">Date</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="invoice in datas">
+                    <td class="text-center">1</td>
+                    <td class="text-center">{{invoice.full_name}}</td>
+                    <td class="text-center">{{invoice.birth_day}}</td>
+                    <td class="text-center">{{invoice.course_name}}</td>
+                    <td class="text-center">{{invoice.total_amount}}</td>
+                    <td class="text-center">{{invoice.collected}}</td>
+                    <td class="text-center">{{invoice.date}}</td>
+                    <th class="text-center">
+                        <!-- <div button-delete></div> -->
+                        <a ui-sref="app.editInvoice({invoiceId:invoice.id})" class="btn-icon bg-success" ng-click="getId('43')"><i class="glyphicon glyphicon-eye-open"></i></a>
+                        <a href="javascript:;" class="btn-icon bg-success" ng-click="open()">Sessions</a>
+                        <a href="javascript:;" class="btn-icon bg-success" ng-click="open(datas, $index)"><i class="glyphicon glyphicon-trash"></i></a>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Xác thực</h3>
+    </div>
+    <div class="modal-body">
+        Bạn có chắc chắn muốn xóa bản ghi này ?
+        Selected: <b>{{ selected.item }}</b>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

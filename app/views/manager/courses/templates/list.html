@@ -1,0 +1,55 @@
+<div class="page ng-scope">
+    <section class="panel panel-default">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Danh sách khóa học</strong></div>
+       <div class="panel-body">
+            <div class="col-md-12 addNew">
+                <a ui-sref="app.addCourse"><button type="button" class="btn btn-primary">Add New</button></a>
+            </div>
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr class="bg-dark">
+                    <th class="text-center">#</th>
+                    <th class="text-center" ng-click="predicate='title'; reverse=!reverse">Title</th>
+                    <th class="text-center">Teacher</th>
+                    <th class="text-center">Tuition-fee</th>
+                    <th class="text-center">Sale of</th>
+                    <th class="text-center">Day learn</th>
+                    <th class="text-center">Dtart date</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="course in datas">
+                    <td class="text-center">{{$index + 1}}</td>
+                    <td class="text-center">{{course.title | orderBy:title}}</td>
+                    <td class="text-center">{{course.teacher}}</td>
+                    <td class="text-center">{{course.tuition_fee}}</td>
+                    <td class="text-center">{{course.sale_of}}</td>
+                    <td class="text-center">{{course.day_learn}}</td>
+                    <td class="text-center">{{course.start_date}}</td>
+                    <th class="text-center">
+                        <!-- <div button-delete></div> -->
+                        <a ui-sref="app.viewCourse({courseId: '{{course.id}}'})" class="btn-icon bg-success" ng-click="getId(course.id)"><i class="glyphicon glyphicon-eye-open"></i></a>
+                        <a ui-sref="app.editCourse({courseId: '{{course.id}}'})" class="btn-icon bg-success"><i class="glyphicon glyphicon-edit"></i></a>
+                        <a href="javascript:;" class="btn-icon bg-success" ng-click="open(datas, $index, course.id)"><i class="glyphicon glyphicon-trash"></i></a>
+                        <a ui-sref="app.managerSession({courseId: '{{course.id}}'})" class="btn-icon bg-success"><i class="glyphicon glyphicon-list"></i></a>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Xác thực</h3>
+    </div>
+    <div class="modal-body">
+        Bạn có chắc chắn muốn xóa bản ghi này ?
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok('courses')">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

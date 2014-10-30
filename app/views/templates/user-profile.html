@@ -1,0 +1,88 @@
+<div class="row" ng-repeat="data in datas">
+    <div class="col-md-6">
+
+        <section class="panel panel-box">
+            <div class="panel-top bg-primary">
+                <div class="text-center">
+                    <h3>User : {{data.full_name}}</h3>
+                    <p>MemberShip Lab Coder : {{abd}}</p>
+                </div>
+                <div class="divider divider-lg"></div>
+                <div class="divider divider-lg"></div>
+            </div>
+            <div class="panel-img bg-primary">
+                <img alt="" src="images/g1.jpg" class="img-circle">
+            </div>
+            <div class="list-justified-container">
+                <ul class="list-justified text-center">
+                    <li>
+                        <a href="http://fb.com/tungtouch" style="color: #3c5a99">
+                           <span class="icon fa fa-3x fa-facebook-square"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" style="color: #0084b4;">
+                        <span class="icon fa fa-3x fa-twitter-square"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" style="color: #d95433">
+                        <span class="icon fa fa-3x fa-google-plus-square"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Profile Info</strong></div>
+            <div class="panel-body">
+                <div class="media">
+                    <div class="media-body">
+                        <ul class="list-unstyled list-info">
+                            <li>
+                                <span class="icon glyphicon glyphicon-user"></span>
+                                <label>Name</label>
+                                {{data.full_name}}
+                            </li>
+                            <li>
+                                <span class="icon glyphicon glyphicon-envelope"></span>
+                                <label>Email</label>
+                                {{data.email}}
+                            </li>
+                            <li>
+                                <span class="icon glyphicon glyphicon-home"></span>
+                                <label>Address</label>
+                                {{data.address}}
+                            </li>
+                            <li>
+                                <span class="icon glyphicon glyphicon-earphone"></span>
+                                <label>Mobile</label>
+                                {{data.phone}}
+                            </li>
+                            <li>
+                                <span class="icon fa fa-facebook-square"></span>
+                                <label>Facebook: </label>
+                                <a href="#">{{data.facebook}}</a>
+                            </li>
+                            <li>
+                                <span class="icon fa fa-twitter-square"></span>
+                                <label>Twitter: </label>
+                                <a href="#">{{data.twitter}}</a>
+                            </li>
+                            <li>
+                                <span class="icon fa fa-google-plus-square"></span>
+                                <label>Google: </label>
+                                <a href="#">{{data.google}}</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

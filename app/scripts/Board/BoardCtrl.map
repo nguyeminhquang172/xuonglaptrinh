@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "BoardCtrl.js",
+  "sourceRoot": "",
+  "sources": [
+    "BoardCtrl.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,EAAA,YAAA,CAAA;AAAA,EAEA,OAAO,CAAC,MAAR,CAAe,iBAAf,EAAkC,EAAlC,CAEA,CAAC,UAFD,CAEY,WAFZ,EAEyB,CACrB,QADqB,EACX,SADW,CAFzB,CAFA,CAAA;AAAA"
+}
