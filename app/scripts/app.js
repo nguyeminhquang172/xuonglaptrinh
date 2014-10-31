@@ -20,7 +20,7 @@
             views: {
               "header": { templateUrl: 'views/header.html' },
               "navbar": { templateUrl: 'views/nav.html' },
-              "mainContain": { templateUrl: 'views/main.html' },
+              "mainContain": { templateUrl: 'views/main.html' }
             },
             accessLevel: window.userCan.accessUser
           })
@@ -29,7 +29,7 @@
             views: {
               'contenView': {
                 controller: 'DashboardCtrl',
-                templateUrl: 'views/learning/board.html'
+                // templateUrl: 'views/learning/board.html'
               }
             },
             accessLevel: window.userCan.accessUser
@@ -93,7 +93,7 @@
                 templateUrl: 'views/courses/sessions.html'
               }
             },
-            accessLevel: window.userCan.accessUser
+            // accessLevel: window.userCan.accessUser
           })
           .state('app.managerCourse', {
             url: '/manager/courses',
@@ -250,12 +250,20 @@
   .run(['$rootScope', '$state', '$location', 'auth',
   function($rootScope, $state, $location, auth){
     $rootScope.$on('$stateChangeStart', function (event, to, toParams, fromState, from) {
+      console.log('fds: ', auth.getLocalToken());
         if (auth.getLocalToken() === null) {
           console.log('not token');
             auth.pendingStateChange = {
                 to: to,
                 toParams: toParams
             };
+        }else{
+          console.log('to: ', to);
+          console.log('fromState: ', fromState);
+          if(to.url === '/login'){
+            console.log('fdsafdsa')
+            $rootScope.goToState('app.courses');
+          }
         }
         if (to.accessLevel === undefined || auth.authorize(to.accessLevel)) {
             console.log('access level :', true);
@@ -338,16 +346,21 @@
       httpFn: function(_table, _data, callBack){
         console.log('httpAdd', _data);
         var urlApi = appConfig.apiHost+'/'+_table;
+        console.log('api register : ', urlApi);
+        console.log('data register: ', _data);
         $http({
           url: urlApi,
           method: 'post',
           data: _data
         })
         .success(function(data, status){
+          console.log('data 2: ', data);
+          console.log('status: ', status);
           callBack(status);
-        }, function(error){
+        }, function(error, status){
+          console.log('err registerCourse: ', status);
           console.log('error add: ', error);
-          console.log(_data);
+          console.log(status);
         })
       }
     }
@@ -376,21 +389,22 @@
         _userInfo = 'userInfo',
         _role = 'role',
         _authorizationKey = 'authorization',
+        _courseID = 'courseID',
         _setHeaderToken = function(token){
-          $http.defaults.headers.common(_authorizationKey) = token;
+          $http.defaults.headers.common[_authorizationKey] = token;
         },
         _clearHeaderToken = function(){
-          $http.defaults.headers.common(_authorizationKey) = null;
+          $http.defaults.headers.common[_authorizationKey] = null;
         };
     return {
       getHeaderToken: function(){
-        var token = $http.defaults.headers.common(_authorizationKey);
+        var token = $http.defaults.headers.common[_authorizationKey];
         token ? token = token : token = null;
         return token;
       },
       setHeaderToken: function(){
         var token = this.getLocalToken();
-        $http.defaults.headers.common(_authorizationKey) = token;
+        $http.defaults.headers.common[_authorizationKey] = token;
       },
       clearHeaderToken: function(){
         this.clearLocalRole();
@@ -414,8 +428,8 @@
       getLocalRole: function(){
         return localStorageService.get(_role)
       },
-      setLocalUserInfo: function(username){
-        localStorageService.set(_userInfo, username);
+      setLocalUserInfo: function(user){
+        localStorageService.set(_userInfo, user);
       },
       getLocalUserInfo: function(){
         return localStorageService.get(_userInfo);
@@ -438,8 +452,10 @@
               .success(function (data) {
                   if (data.success) {
                       me.setUser(data.user);
+                      console.log('pendingState.to.accessLevel: ', pendingState.to.accessLevel);
                       if (pendingState.to.accessLevel === undefined || me.authorize(pendingState.to.accessLevel)) {
                           checkUser.resolve();
+                          console.log('checkUser.resolve')
                       } else {
                           checkUser.reject('unauthorized'); // may be 403
                       }
@@ -470,21 +486,21 @@
           method: 'post',
           data: user
         })
-        .success(function(result){
+        .success(function(result, status){
           // role = result.bitMask,
           var token = result.id,
-              role = 2,
-              userInfo = result.user;
+              role = result.role;
           console.log('result login: ', result);
-          callBack(result);
+          callBack(status);
           _this.setLocalToken(token);
           _this.setLocalRole(role);
-          _this.setLocalUserInfo(userInfo);
-        },
-        function(err){
-          console.log('err : ', err);
-          callBack(err);
-        });
+          _this.setLocalUserInfo(result);
+        }
+        )
+        .error(function(error, status){
+          console.log('error:', error);
+          callBack(status);
+        })
       }
     }
   }])
@@ -498,9 +514,19 @@
       }
     }
   })
+  .directive('regcourse',[function(){
+    return {
+      scope: true,
+      controller: function(){
+        this.dirChild = function(){
+          alert('multiple controller');
+          console.log('multiple controller');
+        }
+      }
+    }
+  }])
   .directive('similarCourse', function(){
       return {
-        require: ['?^firtDelete'],
         restrict: 'A',
         scope:{
           sourceApi: '@',
@@ -512,25 +538,46 @@
           updateData: '&',
           id: '@'
         },
-        /*link: function (scope, element, attributes) {
-            element.bind("change", function (changeEvent) {
-                var reader = new FileReader();
-                reader.onload = function (loadEvent) {
-                    scope.$apply(function () {
-                        scope.fileread = loadEvent.target.result;
-                    });
+        link: function (scope, element, attributes, regcourseCtrl) {
+            scope.courseRegister = function(){
+              regcourseCtrl.dirChild();
+            }
+        },
+        controller: function($rootScope, $scope, $http, $parse, $modal, $state, $window, getFieldFac, httpFac, auth, localStorageService, appConfig){
+          $scope.download = function(_id){
+            httpFac.httpFn('chapters','get',_id, function(result){
+              if(result.slide.status !== "public"){
+                if($rootScope.isLogined()){
+                  console.log('getLocalCourseID: ', $scope.getLocalCourseID());
+                  console.log('userID: ', $rootScope.userInfo.userId);
+                  $http({
+                    method: 'get',
+                    url: appConfig.apiHost + '/users/' + $rootScope.userInfo.userId + '/accessTokens'
+                  })
+                  .success(function(data, status){
+                    console.log('data token: ', data);
+                  })
+                }else{
+                  $rootScope.goToState('app.login');
                 }
-                reader.readAsDataURL(changeEvent.target.files[0]);
-            });
-        },*/
-        controller: function($rootScope, $scope, $http, $parse, $modal, $state, $window, getFieldFac){
+              }else{
+                console.log('public');
+              }
+            })
+          };
           // console.log($parse($scope.fields)($scope).length);
           // orderBy:
           $scope.order = function(predicate, reverse) {
             $scope.pros = orderBy($scope.pros, predicate, reverse);
           };
           // End orderBy
-
+          var _courseID = 'courseID';
+          $scope.setLocalCourseID= function(courseId){
+            localStorageService.set(_courseID, courseId);
+          };
+          $scope.getLocalCourseID= function(){
+            return localStorageService.get(_courseID);
+          };
           getFieldFac.getField().then(function (data) {
             $scope.listCourse = data;
             console.log('$scope.listCourse: ', $scope.listCourse);
@@ -613,7 +660,14 @@
               console.log('update error  : ', err);
             });
           };
-
+          $scope.registerCourse = function(data){
+            if($rootScope.isLogined() === false){
+              alert('false');
+            }else{
+              console.log('data registerCourse: ', data);
+              console.log($rootScope.userInfo);
+            }
+          }
           $http({
             url: params[0].urlApi,
             method: params[1].typeMethod

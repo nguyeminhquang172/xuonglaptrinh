@@ -56,8 +56,8 @@
                 <tbody>
                 <tr>
                     <td colspan="2">
-                        <a ui-sref="app.session({courseId: '{{course.id}}' })"><button class="btn btn-success"><span class="glyphicon glyphicon-eye-open"></span> Xem nội dung</button></a>
-                        <a ui-sref="register" ng-show="isLogined()"><button class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Đăng ký</button></a>
+                        <a ui-sref="app.session({courseId: '{{course.id}}' })" ng-click="setLocalCourseID(course.id)"><button class="btn btn-success"><span class="glyphicon glyphicon-eye-open"></span> Xem nội dung</button></a>
+                        <a ui-sref="register" ng-click="registerCourse(course.id); download()"><button class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Đăng ký</button></a>
                         <!-- <a ui-sref="editCourse"><button class="btn btn-success" ng-click="getId(course.id)"><span class="glyphicon glyphicon-edit"></span> Sửa</button></a>
                         <a ui-sref="viewListChild"><button class="btn btn-success"><span class="glyphicon glyphicon-cog"></span> Quản lý</button></a>
                         <button-delete></btn-delete> -->
@@ -69,4 +69,3 @@
         </section>
     </div>
 </div>
-    <pagination class="pagination-sm" direction-links="true" total-items="totalItems" ng-model="course" num-pages="smallnumPages" previous-text="&lsaquo;" next-text="&rsaquo;"></pagination>

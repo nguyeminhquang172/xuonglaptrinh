@@ -9,7 +9,7 @@
     <div class="signin-body">
         <div class="container">
             <div class="form-container">
-
+                <div class="err-message text-center">{{massageError}}</div>
                 <form name="login" class="form-horizontal" novalidate>
                     <fieldset>
                         <div class="form-group" ng-class="{'has-error' : login.email.$invalid && !login.email.$pristine}">

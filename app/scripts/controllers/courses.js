@@ -92,7 +92,7 @@ angular .module('app')
 			$scope._id = $stateParams.courseId;
 			$scope.test = function(){
 				var arrParams = [
-						{urlApi: appConfig.apiHost+'/courses/'+$scope._id+'/sessions'},
+						{urlApi: appConfig.apiHost+'/courses/'+$scope._id+'/chapters'},
 						{typeMethod: 'get'}
 					];
 				return arrParams;
@@ -117,7 +117,7 @@ angular .module('app')
 			$scope._id = $stateParams.courseId;
 			$scope.test = function(){
 				var arrParams = [
-						{urlApi: appConfig.apiHost+'/courses/'+$scope._id+'/sessions'},
+						{urlApi: appConfig.apiHost+'/courses/'+$scope._id+'/chapters'},
 						{typeMethod: 'get'}
 					];
 				return arrParams;
@@ -212,23 +212,38 @@ angular .module('app')
 		.controller('login', ['$scope', '$state', 'auth', 'appConfig',
 		function($scope, $state, auth, appConfig){
 			$scope.userLogin = function(user){
-				console.log('data : ', user);
 				auth.login(user, function(data){
-					console.log(1);
-					if(data){
-						console.log(2);
+					if(data === 200){
 						$state.go('app.courses');
+					}else{
+						$scope.massageError = 'Tài khoản hoặc mật khẩu không đúng !';
 					}
 				})
 			}
 		}])
 		.controller('register', ['$scope', 'httpAdd', '$modal',
 		function($scope, httpAdd, $modal){
+			$scope.sexs = ['Nam', 'Nữ'];
 			$scope.registerFn = function(user){
 				console.log(user);
-				httpAdd.httpFn('users', user, function(result){
-					console.log('result add:', result);
-				})
-				// modal.open();
+				if(user.password !== user.userPassConfirm){
+					$scope.massageError = 'Nhắc lại mật khẩu không khớp';
+				}else{
+					console.log('httpAdd.httpFn')
+					httpAdd.httpFn('users', user, function(result){
+						console.log('httpAdd.httpFn2')
+						console.log('result register: ', result);
+						if(result === 200){
+							console.log('dang ky thanh cong');
+						}else{
+							$scope.managerSession = 'Lỗi đăng ký';
+						}
+					})
+				}
 			}
 		}])
+		/*.controller('download', ['$scope', function($scope){
+			$scope.download = function(){
+				return console.log('click download');
+			}
+		}])*/

@@ -11,16 +11,15 @@
         </div>
         <ul class="list-group">
             <li class="list-group-item">
-                <span class="badge badge-primary" ng-model="session.slide.status">{{session.slide.status}}</span>
+                <span class="badge badge-primary">{{session.slide.status}}</span>
                 <i class="fa fa-cloud-download"></i>
-                <a href="#" ng-hide="session.slide.status !== 'public'">{{session.slide.url}}</a>
-                <span ng-hide="session.slide.status == 'public'">Đăng ký khóa học để tải tài liệu này</span>
+                <a href="javascript:;" ng-click="download(session.id)">{{session.slide.url}}</a>
+                <!-- <span ng-hide="session.slide.status == 'public'">Đăng ký khóa học để tải tài liệu này</span> -->
             </li>
             <li class="list-group-item">
                 <span class="badge badge-primary">{{session.practive.status}}</span>
                 <i class="fa fa-cloud-download"></i>
-                <a href="#" ng-hide="session.practive.status !== 'public'">{{session.practive.url}}</a>
-                <span ng-hide="session.practive.status == 'public'">Đăng ký khóa học để tải tài liệu này</span>
+                <a href="javascript:;" ng-click="download(session.id)">{{session.practive.url}}</a>
             </li>
             <li class="list-group-item">
                 <i class="fa fa-user"></i>

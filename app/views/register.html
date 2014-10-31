@@ -2,13 +2,14 @@
     <section class="panel panel-default">
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Đăng ký</strong></div>
         <div class="panel-body">
+            <div class="text-center">{{massageError}}</div>
             <form name="register" class="form-validation" novalidate>
                 <div class="row">
                     <div class="col-md-6">
-                        <!-- <div class="form-group" ng-class="{'has-error' : register.user_name.$invalid && !register.user_name.$pristine}">
+                        <div class="form-group" ng-class="{'has-error' : register.user_name.$invalid && !register.user_name.$pristine}">
                             <label for="inputUserName">Tên đăng nhập: </label><i>(*)</i>
-                            <input name="user_name" type="text" class="form-control" id="inputUserName" placeholder="Tên đăng nhập" ng-model="user.userName" required>
-                        </div> -->
+                            <input name="user_name" type="text" class="form-control" id="inputUserName" placeholder="Tên đăng nhập" ng-model="users.username" required>
+                        </div>
                         <div class="form-group" ng-class="{'has-error' : register.email.$invalid && !register.email.$pristine}">
                             <label for="inputEmail">Email: </label><i>(*)</i>
                             <input name="email" type="email" class="form-control" id="inputEmail" placeholder="Email" data-ng-model="users.email" required>
@@ -27,17 +28,27 @@
                         </div>
                     </div>
                     <div class="col-md-6">
+                        <div class="form-group" ng-class="{'has-error' : register.sex.$invalid && !register.sex.$pristine}">
+                            <label for="inputAddress">Giới tính:{{sexs}} </label><i>(*)</i>
+                            <select class="form-control" name="sex" ng-model="users.sex" ng-options="sex for sex in sexs">
+                                <option value="">Giới tính</option>
+                            </select>
+                        </div>
                 		<div class="form-group" ng-class="{'has-error' : register.birth_day.$invalid && !register.birth_day.$pristine}">
                             <label for="inputBirthDay">Ngày sinh: </label><i>(*)</i><br/>
                             <input name="birthday" type="date" placeholder="Ngày sinh" class="form-control" ng-model="users.birthday" required>
                         </div>
                         <div class="form-group" ng-class="{'has-error' : register.address.$invalid && !register.address.$pristine}">
                             <label for="inputAddress">Địa chỉ: </label><i>(*)</i>
-                            <input name="address" type="text" class="form-control" id="inputAddress" placeholder="Địa chỉ" ng-model="users.address" required>
+                            <input name="address" type="text" class="form-control" id="inputAddress" placeholder="Địa chỉ" ng-model="users.addr" required>
                         </div>
                         <div class="form-group" ng-class="{'has-error' : register.phone.$invalid && !register.phone.$pristine}">
                             <label for="inputPhone">Điện thoại: </label><i>(*)</i>
                             <input name="phone" type="text" class="form-control" id="inputPhone" placeholder="Điện thoại" ng-model="users.phone" required>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error' : register.avatar.$invalid && !register.avatar.$pristine}">
+                            <label for="inputPhone">Ảnh đại diện: </label><i>(*)</i>
+                            <input name="avatar" type="text" class="form-control" id="inputPhone" placeholder="Ảnh đại diện" ng-model="users.avatar" required>
                         </div>
                     </div>
                 </div>
