@@ -10,7 +10,7 @@
         <li>
             <a ui-sref="app.courses"><i class="fa fa-mortar-board"></i><span data-i18n="Courses"></span></a>
         </li>
-        <li ><!-- ng-show="isManager()" -->
+        <li ng-show="isManager()">
             <a href="#/manager"><i class="fa fa-unlock-alt"></i><span data-i18n="Manager"></span></a>
             <ul>
                 <li><a ui-sref="app.managerUser"><i class="fa fa-angle-right"></i><span data-i18n="Users"></span></a></li>

@@ -3,16 +3,13 @@
   angular.module('app',
     [
       'ngRoute', 'ngAnimate', 'ui.bootstrap', 'app.controllers', 'app.localization',
-      'app.nav', 'app.ui.form.ctrls', 'ui.router', 'LocalStorageModule',
+      'app.nav', 'app.ui.form.ctrls', 'ui.router', 'LocalStorageModule', 'lbServices'
     ])
     .constant('appConfig', {
       apiHost: 'http://vsoft.vn:8888/api'
     })
     .config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
       function($stateProvider, $urlRouterProvider, $httpProvider){
-
-        $httpProvider.defaults.useXDomain = true;
-        delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
         $stateProvider
           .state('app', {
@@ -247,10 +244,25 @@
           $urlRouterProvider.otherwise('/learning/board.html')
       }
     ])
-  .run(['$rootScope', '$state', '$location', 'auth',
-  function($rootScope, $state, $location, auth){
+  .run(['$rootScope', '$state', '$location', 'auth', 'User',
+  function($rootScope, $state, $location, auth, User){
     $rootScope.$on('$stateChangeStart', function (event, to, toParams, fromState, from) {
-      console.log('fds: ', auth.getLocalToken());
+      User.getCurrent().$promise.then(function(data){
+        console.log('roles: ', data);
+        $rootScope.token = data.id;
+        console.log('$rootScope.token: ', $rootScope.token);
+        $rootScope.roles = data.role;
+        $rootScope.role = 0;
+        if(data.role == 'teacher'){
+          $rootScope.role = 2;
+        }else if($rootScope.role == 'admin'){
+          $rootScope.role = 3;
+        }else if($rootScope.role == 'user'){
+          $rootScope.role = 1;
+        }else{
+          $rootScope.role = null;
+        }
+      });
         if (auth.getLocalToken() === null) {
           console.log('not token');
             auth.pendingStateChange = {
@@ -258,10 +270,10 @@
                 toParams: toParams
             };
         }else{
-          console.log('to: ', to);
-          console.log('fromState: ', fromState);
+          // when refresh
+          var token = auth.getLocalToken() ? auth.getLocalToken() : null;
+          auth.setHeaderToken(token);
           if(to.url === '/login'){
-            console.log('fdsafdsa')
             $rootScope.goToState('app.courses');
           }
         }
@@ -270,23 +282,29 @@
         } else {
             console.log('access level :', false);
             event.preventDefault();
-            $state.go('app.login');
+            $state.go('app.courses');
         }
         $rootScope.userInfo = auth.getLocalUserInfo();
     });
     $rootScope.goToState = function(state){
       $state.go(state);
     };
-    $rootScope.isLogined = function(){
-      return auth.isLogin();
-    };
+
+    $rootScope.isTeacher = function(){
+      return (User.isAuthenticated && $rootScope.roles == 'teacher');
+    }
+    $rootScope.isAddmin = function(){
+      return (User.isAuthenticated() && $rootScope.roles == 'admin');
+    }
     $rootScope.isManager = function(){
-      return (auth.isLogin() && auth.manager()) ? true : false;
+      return ($rootScope.isTeacher() || $rootScope.isAddmin());
+    }
+    $rootScope.isLogined = function(){
+      return User.isAuthenticated();
     };
     $rootScope.logout = function(){
-      auth.clearHeaderToken();
-      auth.clearLocalUserInfo();
-      $rootScope.goToState('app.main');
+      User.logout();
+      $rootScope.goToState('app.courses');
     };
   }])
   .factory('getFieldFac', ['$http', '$q', function($http, $q){
@@ -382,29 +400,26 @@
         }
       }
   }])
-  .factory('auth',['$http', 'localStorageService', 'appConfig',
-  function($http, localStorageService, appConfig){
+  .factory('auth',['$http', 'localStorageService', 'appConfig', 'User', '$rootScope',
+  function($http, localStorageService, appConfig, User, $rootScope){
     var _token = 'token',
         _userId = 'id',
         _userInfo = 'userInfo',
         _role = 'role',
-        _authorizationKey = 'authorization',
+        Authorization = 'Authorization',
         _courseID = 'courseID',
-        _setHeaderToken = function(token){
-          $http.defaults.headers.common[_authorizationKey] = token;
-        },
         _clearHeaderToken = function(){
-          $http.defaults.headers.common[_authorizationKey] = null;
+          $http.defaults.headers.common[Authorization] = null;
         };
     return {
       getHeaderToken: function(){
-        var token = $http.defaults.headers.common[_authorizationKey];
-        token ? token = token : token = null;
-        return token;
+        console.log('User.getCurrentToken: ', User.getCurrentToken());
+        return User.getCurrentToken();
       },
       setHeaderToken: function(){
         var token = this.getLocalToken();
-        $http.defaults.headers.common[_authorizationKey] = token;
+        console.log('token: ', token);
+        $http.defaults.headers.common[Authorization] = token;
       },
       clearHeaderToken: function(){
         this.clearLocalRole();
@@ -414,7 +429,8 @@
         localStorageService.set(_token, token);
       },
       getLocalToken: function(){
-        return localStorageService.get(_token);
+        console.log('User.getCurrentToken: ', User.getCurrentToken());
+        return User.getCurrentToken();
       },
       setLocalRole: function(role){
         localStorageService.set(_role, role);
@@ -426,7 +442,8 @@
         localStorageService.set(_token, null);
       },
       getLocalRole: function(){
-        return localStorageService.get(_role)
+        console.log('User.getCurrentUserRole: ', User.getCurrentUserRole());
+        return User.getCurrentUserRole()
       },
       setLocalUserInfo: function(user){
         localStorageService.set(_userInfo, user);
@@ -436,12 +453,6 @@
       },
       clearLocalUserInfo: function(){
         localStorageService.set(_userInfo, null);
-      },
-      isLogin: function(){
-        return this.getLocalToken() ? true : false
-      },
-      manager: function(){
-        return this.getLocalRole() > 1 ? true : false;
       },
       pendingStateChange: null,
       resolvePendingState: function (httpPromise) {
@@ -469,10 +480,13 @@
           me.pendingStateChange = null;
           return checkUser.promise;
       },
+      // check when type url
       authorize: function (accessLevel) {
-        var tokenUser = this.getLocalToken;
-        if (null !== tokenUser) {
-            var result = accessLevel.bitMask <= this.getLocalRole();
+        var tokenUser = this.getLocalToken();
+        console.log('tokenUser: ', this.getLocalToken());
+        console.log('$rootScope.role: ', $rootScope.role);
+          if (null !== tokenUser) {
+            var result = accessLevel.bitMask <= $rootScope.role;
             return result;
         } else {
           console.log('return false');
@@ -480,26 +494,11 @@
         }
       },
       login: function(user, callBack){
-        var _this = this;
-        $http({
-          url: appConfig.apiHost + '/users/login',
-          method: 'post',
-          data: user
-        })
-        .success(function(result, status){
-          // role = result.bitMask,
-          var token = result.id,
-              role = result.role;
-          console.log('result login: ', result);
-          callBack(status);
-          _this.setLocalToken(token);
-          _this.setLocalRole(role);
-          _this.setLocalUserInfo(result);
-        }
-        )
-        .error(function(error, status){
-          console.log('error:', error);
-          callBack(status);
+        User.login(user, function(data){
+          console.log('data logi success: ', data);
+          callBack(200);
+        }, function(err){
+          callBack(err.status);
         })
       }
     }
@@ -552,10 +551,13 @@
                   console.log('userID: ', $rootScope.userInfo.userId);
                   $http({
                     method: 'get',
-                    url: appConfig.apiHost + '/users/' + $rootScope.userInfo.userId + '/accessTokens'
+                    url: appConfig.apiHost + '/users'
                   })
                   .success(function(data, status){
                     console.log('data token: ', data);
+                  })
+                  .error(function(err, status){
+                    console.log('err', err);
                   })
                 }else{
                   $rootScope.goToState('app.login');
@@ -662,7 +664,7 @@
           };
           $scope.registerCourse = function(data){
             if($rootScope.isLogined() === false){
-              alert('false');
+              $rootScope.goToState('app.login');
             }else{
               console.log('data registerCourse: ', data);
               console.log($rootScope.userInfo);

@@ -29,7 +29,7 @@ angular .module('app')
 				$scope.session.courseID = result.id;
 			})
 			$scope.addSession = function(session){
-				httpAdd.httpFn('sessions', session, function(status){
+				httpAdd.httpFn('chapters', session, function(status){
 					if(200 === status){
 						// $scope.open();
 					}
@@ -73,7 +73,7 @@ angular .module('app')
 			$scope._id = $stateParams.sessionId;
 			$scope.test = function(){
 				var arrParams = [
-						{urlApi: appConfig.apiHost+'/sessions/'+$scope._id},
+						{urlApi: appConfig.apiHost+'/chapters/'+$scope._id},
 						{typeMethod: 'get'}
 					];
 				return arrParams;
@@ -81,7 +81,7 @@ angular .module('app')
 
 			$scope.update = function(){
 				var arrParams = [
-						{urlApi: appConfig.apiHost+'/sessions/'+$scope._id},
+						{urlApi: appConfig.apiHost+'/chapters/'+$scope._id},
 						{typeMethod: 'put'}
 					];
 				return arrParams;
@@ -189,31 +189,19 @@ angular .module('app')
 			$scope._id = $stateParams.sessionId;
 			$scope.test = function(){
 				var arrParams = [
-						{urlApi: appConfig.apiHost+'/sessions/'+$scope._id},
+						{urlApi: appConfig.apiHost+'/chapters/'+$scope._id},
 						{typeMethod: 'get'}
 					];
 				return arrParams;
 			}
 		}])
-		.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
-			/*$scope.items = items;
-			$scope.selected = {
-				item: $scope.items[0]
-			};*/
-
-			$scope.ok = function () {
-				$modalInstance.close($scope.selected.item);
-			};
-
-			$scope.cancel = function () {
-				$modalInstance.dismiss('cancel');
-			};
-		})
 		.controller('login', ['$scope', '$state', 'auth', 'appConfig',
 		function($scope, $state, auth, appConfig){
 			$scope.userLogin = function(user){
 				auth.login(user, function(data){
+					console.log('data login: ', data);
 					if(data === 200){
+						console.log('true 200');
 						$state.go('app.courses');
 					}else{
 						$scope.massageError = 'Tài khoản hoặc mật khẩu không đúng !';
@@ -234,7 +222,23 @@ angular .module('app')
 						console.log('httpAdd.httpFn2')
 						console.log('result register: ', result);
 						if(result === 200){
-							console.log('dang ky thanh cong');
+							$scope.messages = '';
+							var modalInstance = $modal.open({
+								templateUrl: 'myModalContent.html',
+								controller: 'ModalInstanceCtrl',
+								size: 'sm',
+								resolve: {
+									messages: function () {
+										return $scope.messages = 'Đăng lý thành công';
+									}
+								}
+							});
+
+							modalInstance.result.then(function (selectedItem) {
+								$scope.selected = selectedItem;
+							}, function () {
+								console.log('cancel');
+							});
 						}else{
 							$scope.managerSession = 'Lỗi đăng ký';
 						}
@@ -242,8 +246,16 @@ angular .module('app')
 				}
 			}
 		}])
-		/*.controller('download', ['$scope', function($scope){
-			$scope.download = function(){
-				return console.log('click download');
-			}
-		}])*/
+		.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
+			/*$scope.items = items;
+			$scope.selected = {
+				item: $scope.items[0]
+			};*/
+			$scope.ok = function () {
+				$modalInstance.close($scope.selected.messages);
+			};
+			$scope.cancel = function () {
+				$modalInstance.dismiss('cancel');
+			};
+		})
+;

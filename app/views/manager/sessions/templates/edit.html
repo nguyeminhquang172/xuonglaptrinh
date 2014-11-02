@@ -11,7 +11,7 @@
                         </div>
                         <div class="form-group" ng-class="{'has-error' : edit_datas.datas_title.$invalid && !edit_datas.datas_title.$pristine}">
                             <label for="inputdatas">Tên buổi học</label>
-                            <input name="datas_title" type="text" class="form-control" id="inputdatas" placeholder="Tên buổi học" ng-model="datas.datas_name" required>
+                            <input name="datas_title" type="text" class="form-control" id="inputdatas" placeholder="Tên buổi học" ng-model="datas.title" required>
                         </div>
                         <div class="form-group">
                             <div class="row-fluid"><label for="inputSlideUrl">Bài giảng</label></div>
@@ -24,7 +24,7 @@
                             <div class="row-fluid"><label for="inputPractive">Bài tập</label></div>
                             <div class="row">
                                 <div class="col-md-6"><input type="text" class="form-control" id="inputPractive" placeholder="Link tải bài tập" ng-model="datas.practive.url"></div>
-                                <div class="col-md-6"><input type="text" class="form-control" id="inputPractive" placeholder="Trạng thái" ng-model="datas.practive.status"></div>
+                                <div class="col-md-6"><input type="text" class="form-control" id="inputPractice" placeholder="Trạng thái" ng-model="datas.practice.status"></div>
                             </div>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputDate">Date</label>
-                            <input type="date" class="form-control" id="inputDate" ng-model="datas.date">
+                            <input type="date" class="form-control" id="inputDate" ng-model="datas.dateC">
                         </div>
                         <div class="form-group">
                             <label for="inputNode">Ghi chú</label>

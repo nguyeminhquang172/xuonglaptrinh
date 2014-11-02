@@ -14,15 +14,15 @@
                     </div>
                     <div class="form-group">
                         <label for="inputDescription">Mô tả</label>
-                        <textarea name="" id="inputDescription" class="form-control" rows="4" placeholder="Mô tả" ng-model="datas.description"></textarea>
+                        <textarea name="" id="inputDescription" class="form-control" rows="4" placeholder="Mô tả" ng-model="datas.desc"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="inputDayLearn">Ngày học</label>
-                        <input type="text" class="form-control" id="inputDayLearn" placeholder="Ngày học" ng-model="datas.day_learn">
+                        <input type="text" class="form-control" id="inputDayLearn" placeholder="Ngày học" ng-model="datas.dayLearn">
                     </div>
                     <div class="form-group">
                         <label for="inputDateStart">Khai giảng</label>
-                        <input type="date" class="form-control" id="inputDateStart" ng-model="datas.start_date">
+                        <input type="date" class="form-control" id="inputDateStart" ng-model="datas.startDate">
                     </div>
                     <div class="form-group" ng-class="{'has-error' : add_course.subTitle.$invalid && !add_course.subTitle.$pristine}">
                         <label for="inputLocation">Hình thức</label>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="form-group" ng-class="{'has-error' : add_course.avatar.$invalid && !add_course.avatar.$pristine}">
                         <label for="inputIcon">Icon</label>
-                        <input name="avatar" type="url" class="form-control" id="inputIcon" placeholder="Url icon" ng-model="datas.image_view" required>
+                        <input name="avatar" type="url" class="form-control" id="inputIcon" placeholder="Url icon" ng-model="datas.image" required>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputSummaryContents">Tóm tắt nội dung</label>
@@ -47,19 +47,19 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="inputTime">Số giờ học: (giờ)</label>
-                                <input type="number" class="form-control" id="inputTime" placeholder="0" ng-model="datas.time_learn">
+                                <input type="text" class="form-control" id="inputTime" placeholder="0" ng-model="datas.timeLearn">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="inputPrice">Lệ phí: (VNĐ)</label>
-                                <input type="number" class="form-control" id="inputPrice" placeholder="0" ng-model="datas.tuition_fee">
+                                <input type="text" class="form-control" id="inputPrice" placeholder="0" ng-model="datas.tutionFee">
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="inputSaleOf">Giảm giá: (%)</label>
-                                <input type="number" class="form-control" id="inputSaleOf" placeholder="0" ng-model="datas.sale_of">
+                                <input type="number" class="form-control" id="inputSaleOf" placeholder="0" ng-model="datas.saleOff">
                             </div>
                         </div>
                     </div>

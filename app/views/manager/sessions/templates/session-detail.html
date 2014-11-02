@@ -13,14 +13,12 @@
             <li class="list-group-item">
                 <span class="badge badge-primary" ng-model="datas.slide.status">{{datas.slide.status}}</span>
                 <i class="fa fa-cloud-download"></i>
-                <a href="#" ng-hide="datas.slide.status !== 'public'">{{datas.slide.url}}</a>
-                <span ng-hide="datas.slide.status == 'public'">Đăng ký khóa học để tải tài liệu này</span>
+                <a href="#">{{datas.slide.url}}</a>
             </li>
             <li class="list-group-item">
-                <span class="badge badge-primary">{{datas.practive.status}}</span>
+                <span class="badge badge-primary">{{datas.practice.status}}</span>
                 <i class="fa fa-cloud-download"></i>
-                <a href="#" ng-hide="datas.practive.status !== 'public'">{{datas.practive.url}}</a>
-                <span ng-hide="datas.practive.status == 'public'">Đăng ký khóa học để tải tài liệu này</span>
+                <a href="#">{{datas.practice.url}}</a>
             </li>
             <li class="list-group-item">
                 <i class="fa fa-user"></i>
@@ -28,7 +26,7 @@
             </li>
             <li class="list-group-item">
                 <i class="fa fa-calendar-o"></i>
-                {{datas.date}}
+                {{datas.dateC}}
             </li>
             <li class="list-group-item">
                 <i class="fa fa-comment-o"></i>

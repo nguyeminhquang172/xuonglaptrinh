@@ -11,7 +11,7 @@
                         </div>
                         <div class="form-group">
                             <label for="inputSubtitle">Tên con</label>
-                            <input name="subTitle" type="text" class="form-control" id="inputSubtitle" placeholder="Tên con" ng-model="course.slug">
+                            <input name="subTitle" type="text" class="form-control" id="inputSubtitle" placeholder="Tên con" ng-model="course.subtitle">
                         </div>
                         <div class="form-group">
                             <label for="inputDescription">Mô tả</label>
@@ -29,6 +29,10 @@
                             <label for="inputLocation">Hình thức</label>
                             <input type="text" class="form-control" id="inputLocation" placeholder="Hình thức" ng-model="course.location">
                         </div>
+                        <div class="form-group" ng-class="{'has-error' : add_course.subTitle.$invalid && !add_course.subTitle.$pristine}">
+                            <label for="inputLocation">Hình thức</label>
+                            <input type="text" class="form-control" id="inputLocation" placeholder="Hình thức" ng-model="course.status">
+                        </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
@@ -37,7 +41,7 @@
                         </div>
                         <div class="form-group" ng-class="{'has-error' : add_course.avatar.$invalid && !add_course.avatar.$pristine}">
                             <label for="inputIcon">Icon</label>
-                            <input name="avatar" type="url" class="form-control" id="inputIcon" placeholder="Url icon" ng-model="course.imageView" required>
+                            <input name="avatar" type="url" class="form-control" id="inputIcon" placeholder="Url icon" ng-model="course.image" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputSummaryContents">Tóm tắt nội dung</label>
@@ -60,7 +64,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputSaleOf">Giảm giá: (%)</label>
-                                    <input type="number" class="form-control" id="inputSaleOf" placeholder="0" ng-model="course.saleOf">
+                                    <input type="number" class="form-control" id="inputSaleOf" placeholder="0" ng-model="course.saleOff">
                                 </div>
                             </div>
                         </div>
@@ -73,7 +77,7 @@
                 <div class="row-fluid">
                     <button type="submit"
                         class="btn btn-success btn-w-md"
-                        ng-disabled="add_course.$invalid" ng-click="addCourse(course)">Update</button>
+                        ng-disabled="add_course.$invalid" ng-click="addCourse(course)">Thêm</button>
                 </div>
             </form>
         </div>

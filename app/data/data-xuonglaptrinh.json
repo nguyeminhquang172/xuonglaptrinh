@@ -87,6 +87,7 @@ address										string
 avatar										string				defaul: url image
 role										number
 courseID						x			string				là một mảng các khóa học học viên đã đăng ký
+groupID							x 			number
 
 
 

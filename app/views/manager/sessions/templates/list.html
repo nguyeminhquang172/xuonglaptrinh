@@ -9,7 +9,6 @@
                 <thead>
                 <tr class="bg-dark">
                     <th class="text-center">#</th>
-                    <th class="text-center">session name</th>
                     <th class="text-center">Session name</th>
                     <th class="text-center">Teacher</th>
                     <th class="text-center">Slide status</th>
@@ -21,12 +20,11 @@
                 <tbody>
                 <tr ng-repeat="session in datas">
                     <td class="text-center">{{$index + 1}}</td>
-                    <td class="text-center">{{session.course_name}}</td>
-                    <td class="text-center">{{session.session_name}}</td>
+                    <td class="text-center">{{session.title}}</td>
                     <td class="text-center">{{session.teacher}}</td>
                     <td class="text-center">{{session.slide.status}}</td>
-                    <td class="text-center">{{session.practive.status}}</td>
-                    <td class="text-center">{{session.date}}</td>
+                    <td class="text-center">{{session.practice.status}}</td>
+                    <td class="text-center">{{session.dateC}}</td>
                     <th class="text-center">
                         <a ui-sref="app.viewSession({sessionId: '{{session.id}}'})" class="btn-icon bg-success" ng-click="getId('43')"><i class="glyphicon glyphicon-eye-open"></i></a>
                         <a ui-sref="app.editSession({sessionId: '{{session.id}}'})" class="btn-icon bg-success"><i class="glyphicon glyphicon-edit"></i></a>

@@ -1,0 +1,17 @@
+admin:
+		truy cập được vào courses, chapters, managers, bills, users
+		insert + edit + delete courses, chapters, bills, users
+		(courses có chapter thì không được xóa, chỉ được xóa khi course đó không có chapter nào)
+		download: chapters
+teacher:
+		truy cập được vào courses, chapters, managers
+		insert + edit + delete chapters của courses mà giáo viên đó phụ trách
+		download: chapters
+Học viên:
+		truy cập được vào courses, chapters, bills của courses mà học viên đó đã đăng ký
+		download: chapters của courses đã đăng ký học
+user:
+		truy cập được vào courses, chapters, xem thông tin của user đó (user profile)
+		edit thông tin ngoài các trường : role, groupID, courseID
+web:
+		truy cập được vào courses, chapters
