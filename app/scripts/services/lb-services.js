@@ -30,7 +30,7 @@
                     },
 
                     "logout": {
-                        url: urlBase + "/Users/logout",
+                        url: urlBase + "Users/logout",
                         method: "POST",
                         interceptor: {
                             response: function (response) {

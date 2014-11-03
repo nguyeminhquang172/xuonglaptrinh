@@ -1,6 +1,6 @@
     <div class="page ng-scope">
         <section class="panel panel-default">
-            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Danh sách user</strong></div>
+            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Danh sách học viên của khóa học - <span class="myTitle">{{getLocalTitle()}}</span></strong></div>
             <div class="panel-body">
                 <div class="col-md-12 addNew">
                     <a ui-sref="app.addUser"><button type="button" class="btn btn-primary">Add New</button></a>
@@ -9,28 +9,27 @@
                     <thead>
                     <tr class="bg-dark">
                         <th class="text-center">#</th>
-                        <th class="text-center">ID</th>
-                        <th class="text-center">Full name</th>
-                        <th class="text-center">Birth day</th>
-                        <th class="text-center">Phone</th>
+                        <th class="text-center">Họ tên</th>
+                        <th class="text-center">Ngày sinh</th>
+                        <th class="text-center">Điện thoại</th>
                         <th class="text-center">Email</th>
-                        <th class="text-center">Role</th>
-                        <th class="text-center">Address</th>
+                        <th class="text-center">Quyền</th>
+                        <th class="text-center">Địa chỉ</th>
                         <th class="text-center">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr ng-repeat="user in datas">
                         <td class="text-center">{{$index + 1}}</td>
-                        <td class="text-center">{{user.CMTND}}</td>
-                        <td class="text-center">{{user.full_name}}</td>
-                        <td class="text-center">{{user.birth_day}}</td>
+                        <td class="text-center">{{user.fullName}}</td>
+                        <td class="text-center">{{user.birthDay}}</td>
                         <td class="text-center">{{user.phone}}</td>
                         <td class="text-center">{{user.email}}</td>
                         <td class="text-center">{{user.role}}</td>
                         <td class="text-center">{{user.address}}</td>
                         <th class="text-center">
-                            <a href="javascript:;" class="btn-icon bg-success" ng-click="open(datas, $index)"><i class="glyphicon glyphicon-trash"></i></a>
+                            <a href="javascript:;" class="btn-icon bg-success" ng-click="open(datas, $index, user.id)"><i class="glyphicon glyphicon-trash"></i></a>
+                            <a ui-sref="app.updateUserCourse" class="btn-icon bg-success"><i class="glyphicon glyphicon-edit"></i></a>
                         </th>
                     </tr>
                     </tbody>
@@ -45,10 +44,9 @@
     </div>
     <div class="modal-body">
         Bạn có chắc chắn muốn xóa bản ghi này ?
-        Selected: <b>{{ selected.item }}</b>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-primary" ng-click="ok('users')">OK</button>
         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
 </script>

@@ -39,6 +39,7 @@
             url: '/user/invoice',
             views:{
               'contenView': {
+                controller: 'userInvoice',
                 templateUrl: 'views/user/invoice.html'
               }
             },
@@ -106,6 +107,7 @@
             url: '/manager/invoices',
             views: {
               'contenView': {
+                controller: 'invoice',
                 templateUrl: 'views/manager/invoices/lists.html'
               }
             },
@@ -149,15 +151,34 @@
             },
             accessLevel: window.userCan.accessManager
           })
-          /*.state('app.sessions', {
-            url: '/manager/sessions',
+          .state('app.managerBillCourse', {
+            url: '/manager/courses/:courseId/bills',
             views: {
-              'contenView': {
-                templateUrl: 'views/manager/sessions/lists.html'
+              'contenView' :{
+                controller: 'billOfCourse',
+                templateUrl: 'views/manager/invoices/lists.html'
               }
             },
-            // accessLevel: window.userCan.accessManager
-          })*/
+            accessLevel: window.userCan.accessManager
+          })
+          .state('app.managerUserCourse', {
+            url: '/manager/courses/:courseId/users',
+            views: {
+              'contenView': {
+                controller: 'managerUserCourse',
+                templateUrl: 'views/manager/users/lists.html'
+              }
+            }
+          })
+          .state('app.updateUserCourse', {
+            url: '/manager/users/:userId/update',
+            views: {
+              'contenView': {
+                controller: 'updateUserCourse',
+                templateUrl: ''
+              }
+            }
+          })
           .state('app.managerUser', {
             url: '/manager/users',
             views: {
@@ -172,6 +193,7 @@
             url: '/manager/user/add',
             views: {
               'contenView': {
+                controller: 'addUser',
                 templateUrl: 'views/manager/users/templates/add.html',
               }
             },
@@ -206,14 +228,6 @@
               }
             }
           })
-/*          .state('managerUserInvoice', {
-            url: '/manager/user/invoice',
-            views: {
-              'contenView': {
-                templateUrl: 'views/user/invoices.html',
-              }
-            }
-          })*/
           .state('app.login', {
             url: '/login',
             views: {
@@ -247,23 +261,31 @@
   .run(['$rootScope', '$state', '$location', 'auth', 'User',
   function($rootScope, $state, $location, auth, User){
     $rootScope.$on('$stateChangeStart', function (event, to, toParams, fromState, from) {
+
+      $rootScope.userInfo = {};
+      $rootScope.token = User.getCurrentToken() ? User.getCurrentToken() : null;
+      console.log('$rootScope token: ', $rootScope.token);
+
+
       User.getCurrent().$promise.then(function(data){
-        console.log('roles: ', data);
-        $rootScope.token = data.id;
-        console.log('$rootScope.token: ', $rootScope.token);
-        $rootScope.roles = data.role;
-        $rootScope.role = 0;
-        if(data.role == 'teacher'){
+        console.log('user current: ', data);
+        $rootScope.userInfo.userName = data.fullName;
+        $rootScope.userInfo.avatar = data.avatar;
+        var roleCurrent = data.role;
+        if(roleCurrent == 'teacher'){
           $rootScope.role = 2;
-        }else if($rootScope.role == 'admin'){
+        }else if(roleCurrent == 'admin'){
           $rootScope.role = 3;
-        }else if($rootScope.role == 'user'){
+        }else if(roleCurrent == 'user'){
           $rootScope.role = 1;
         }else{
           $rootScope.role = null;
         }
+        auth.setLocalRole($rootScope.role);
       });
-        if (auth.getLocalToken() === null) {
+
+
+        if (User.getCurrentToken() === null) {
           console.log('not token');
             auth.pendingStateChange = {
                 to: to,
@@ -271,8 +293,6 @@
             };
         }else{
           // when refresh
-          var token = auth.getLocalToken() ? auth.getLocalToken() : null;
-          auth.setHeaderToken(token);
           if(to.url === '/login'){
             $rootScope.goToState('app.courses');
           }
@@ -284,25 +304,26 @@
             event.preventDefault();
             $state.go('app.courses');
         }
-        $rootScope.userInfo = auth.getLocalUserInfo();
     });
     $rootScope.goToState = function(state){
       $state.go(state);
     };
 
     $rootScope.isTeacher = function(){
-      return (User.isAuthenticated && $rootScope.roles == 'teacher');
+      return (User.isAuthenticated && $rootScope.role == 2);
     }
-    $rootScope.isAddmin = function(){
-      return (User.isAuthenticated() && $rootScope.roles == 'admin');
+    $rootScope.isAdmin = function(){
+      console.log('isAdmin: ', User.isAuthenticated() && $rootScope.role == 3);
+      return (User.isAuthenticated() && $rootScope.role == 3);
     }
     $rootScope.isManager = function(){
-      return ($rootScope.isTeacher() || $rootScope.isAddmin());
+      return ($rootScope.isTeacher() || $rootScope.isAdmin());
     }
     $rootScope.isLogined = function(){
       return User.isAuthenticated();
     };
     $rootScope.logout = function(){
+      auth.clearLocalRole();
       User.logout();
       $rootScope.goToState('app.courses');
     };
@@ -328,7 +349,7 @@
       }
     }
   }])
-  .factory('httpFac', ['$http', 'appConfig', function($http, appConfig){
+  .factory('httpFac', ['$http', 'appConfig', 'User', function($http, appConfig, User){
     return {
       httpFn: function(_table, _method, _id, callBack){
         $http({
@@ -345,6 +366,19 @@
           callBack(error);
         });
       },
+      httpTwoParams: function(_table, _method, callBack){
+        $http({
+          url: appConfig.apiHost+'/'+_table+'/'+_id,
+          method: _method
+        })
+        .success(function(data, status){
+          console.log('httpTwoParams status: ', status);
+          callBack(status);
+        }, function(err){
+          console.log('httpTwoParams err: ', err);
+          callBack(err);
+        })
+      },
       httpUpdate: function(_table, _method, _id, _data, callBack){
         $http({
           url: appConfig.apiHost+'/'+_table+'/'+_id,
@@ -356,6 +390,28 @@
         }, function(error){
           callBack(error);
         });
+      },
+      httpRegisterCourse: function(_courseID, _totalMount, callBack){
+        var datas = {},
+            userID = User.getCurrentId();
+            if(userID !== null || _courseID !== null || _totalMount !== null){
+              datas.userID = userID;
+              datas.courseID = _courseID;
+              datas.totalMount = _totalMount;
+              console.log('data resgiter course: ', datas);
+              $http({
+                url: appConfig.apiHost+'/bills',
+                method: 'post',
+                data: datas
+              })
+              .success(function(result, status){
+                console.log('status resgiter course success: ', status);
+                callBack(status);
+              }, function(err, status){
+                console.log('status resgiter course err: ', err);
+                callBack(status);
+              })
+            }
       }
     }
   }])
@@ -402,57 +458,23 @@
   }])
   .factory('auth',['$http', 'localStorageService', 'appConfig', 'User', '$rootScope',
   function($http, localStorageService, appConfig, User, $rootScope){
-    var _token = 'token',
-        _userId = 'id',
-        _userInfo = 'userInfo',
-        _role = 'role',
+    var _role = 'role',
         Authorization = 'Authorization',
-        _courseID = 'courseID',
-        _clearHeaderToken = function(){
-          $http.defaults.headers.common[Authorization] = null;
-        };
+        _courseID = 'courseID';
     return {
-      getHeaderToken: function(){
-        console.log('User.getCurrentToken: ', User.getCurrentToken());
-        return User.getCurrentToken();
-      },
       setHeaderToken: function(){
-        var token = this.getLocalToken();
+        var token = User.getCurrentToken();
         console.log('token: ', token);
         $http.defaults.headers.common[Authorization] = token;
-      },
-      clearHeaderToken: function(){
-        this.clearLocalRole();
-        this.clearLocalToken();
-      },
-      setLocalToken: function(token){
-        localStorageService.set(_token, token);
-      },
-      getLocalToken: function(){
-        console.log('User.getCurrentToken: ', User.getCurrentToken());
-        return User.getCurrentToken();
       },
       setLocalRole: function(role){
         localStorageService.set(_role, role);
       },
+      getLocalRole: function(){
+        return localStorageService.get(_role);
+      },
       clearLocalRole: function(){
         localStorageService.set(_role, null);
-      },
-      clearLocalToken: function(){
-        localStorageService.set(_token, null);
-      },
-      getLocalRole: function(){
-        console.log('User.getCurrentUserRole: ', User.getCurrentUserRole());
-        return User.getCurrentUserRole()
-      },
-      setLocalUserInfo: function(user){
-        localStorageService.set(_userInfo, user);
-      },
-      getLocalUserInfo: function(){
-        return localStorageService.get(_userInfo);
-      },
-      clearLocalUserInfo: function(){
-        localStorageService.set(_userInfo, null);
       },
       pendingStateChange: null,
       resolvePendingState: function (httpPromise) {
@@ -480,13 +502,13 @@
           me.pendingStateChange = null;
           return checkUser.promise;
       },
-      // check when type url
+
       authorize: function (accessLevel) {
-        var tokenUser = this.getLocalToken();
-        console.log('tokenUser: ', this.getLocalToken());
+        var tokenUser = User.getCurrentToken();
+        console.log('getCurrentToken: ', User.getCurrentToken());
         console.log('$rootScope.role: ', $rootScope.role);
           if (null !== tokenUser) {
-            var result = accessLevel.bitMask <= $rootScope.role;
+            var result = accessLevel.bitMask <= this.getLocalRole();
             return result;
         } else {
           console.log('return false');
@@ -542,7 +564,7 @@
               regcourseCtrl.dirChild();
             }
         },
-        controller: function($rootScope, $scope, $http, $parse, $modal, $state, $window, getFieldFac, httpFac, auth, localStorageService, appConfig){
+        controller: function($rootScope, $scope, $http, $parse, $modal, $state, $window, getFieldFac, httpFac, auth, localStorageService, appConfig, User){
           $scope.download = function(_id){
             httpFac.httpFn('chapters','get',_id, function(result){
               if(result.slide.status !== "public"){
@@ -573,12 +595,23 @@
             $scope.pros = orderBy($scope.pros, predicate, reverse);
           };
           // End orderBy
+          $scope.isTeacher = function(){
+            return (User.isAuthenticated && $rootScope.role == 2);
+          }
           var _courseID = 'courseID';
           $scope.setLocalCourseID= function(courseId){
             localStorageService.set(_courseID, courseId);
           };
           $scope.getLocalCourseID= function(){
             return localStorageService.get(_courseID);
+          };
+          var _title = 'title';
+          $scope.setLocalTitle = function(title){
+            console.log('setLocalTitle: ', title);
+            localStorageService.set(_title, title)
+          };
+          $scope.getLocalTitle= function(){
+            return localStorageService.get(_title);
           };
           getFieldFac.getField().then(function (data) {
             $scope.listCourse = data;
@@ -618,7 +651,7 @@
               // console.log($scope.doc)
             }
             $scope.ok = function (_table) {
-              console.log('ok');
+              console.log('ok', _table);
               httpFac.httpFn(_table, 'delete', $scope.idDelete, function(data){
                 console.log('delete call : ', data);
               });
@@ -662,16 +695,38 @@
               console.log('update error  : ', err);
             });
           };
-          $scope.registerCourse = function(data){
+
+          $scope.registerCourse = function(_courseID, _totalMount){
+            console.log('registerCourse _courseID: ', _courseID);
+            console.log('registerCourse _totalMount: ', _totalMount);
             if($rootScope.isLogined() === false){
               $rootScope.goToState('app.login');
             }else{
-              console.log('data registerCourse: ', data);
-              console.log($rootScope.userInfo);
+              httpFac.httpRegisterCourse(_courseID, _totalMount, function(result){
+                if(result === 200){
+                  var modalInstance = $modal.open({
+                    templateUrl: 'myModalContent.html',
+                    controller: ModalInstanceCtrl,
+                    scope : $scope,
+                    size: 'sm'
+                  });
+                  modalInstance.result.then(function () {
+                  }, function(){
+                  });
+                }
+              })
             }
           }
+
+          var _url = '';
+          if(params[2]){
+            _url = params[0].urlApi + params[2].filterInclude
+          }else{
+            _url = params[0].urlApi
+          }
+          console.log('urlApi : ', _url);
           $http({
-            url: params[0].urlApi,
+            url: _url,
             method: params[1].typeMethod
           })
           .success(function(data){

@@ -74,9 +74,9 @@
             </li>
             <li class="dropdown text-normal nav-profile" ng-show="isLogined()">
                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="images/g1.jpg" alt="" class="img-circle img30_30">
+                    <img src="{{userInfo.avatar}}" alt="" class="img-circle img30_30">
                     <span class="hidden-xs">
-                        <span>{{userInfo.username}}</span>
+                        <span>{{userInfo.userName}}</span>
                     </span>
                 </a>
                 <ul class="dropdown-menu with-arrow pull-right">

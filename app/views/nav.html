@@ -13,10 +13,9 @@
         <li ng-show="isManager()">
             <a href="#/manager"><i class="fa fa-unlock-alt"></i><span data-i18n="Manager"></span></a>
             <ul>
-                <li><a ui-sref="app.managerUser"><i class="fa fa-angle-right"></i><span data-i18n="Users"></span></a></li>
+                <li ng-show="isAdmin()"><a ui-sref="app.managerUser"><i class="fa fa-angle-right"></i><span data-i18n="Users"></span></a></li>
                 <li><a ui-sref="app.managerCourse"><i class="fa fa-angle-right"></i><span data-i18n="Courses"></span></a></li>
-                <!-- <li><a ui-sref="app.managerSession"><i class="fa fa-angle-right"></i><span data-i18n="Sessions of course"></span></a></li> -->
-                <li><a ui-sref="app.managerInvoice"><i class="fa fa-angle-right"></i><span data-i18n="Invoices"></span></a></li>
+                <li ng-show="isAdmin()"><a ui-sref="app.managerInvoice"><i class="fa fa-angle-right"></i><span data-i18n="Invoices"></span></a></li>
             </ul>
         </li>
     </ul>

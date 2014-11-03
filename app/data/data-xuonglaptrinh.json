@@ -53,6 +53,7 @@ tbl_invoices
 fields 							null		type
 
 user_invoice_id								string
+saleGroup						x 			number
 totalMount									string
 collected						x			string
 data 							x			date

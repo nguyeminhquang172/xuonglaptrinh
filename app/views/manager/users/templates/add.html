@@ -1,53 +1,80 @@
 <div class="page ng-scope">
     <section class="panel panel-default">
-        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Thêm giáo viên</strong></div>
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Thêm mới User</strong></div>
         <div class="panel-body">
-            <form name="add_user" class="form-validation" novalidate>
+            <div class="text-center err-message">{{massageError}}</div>
+            <form name="register" class="form-validation" novalidate>
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="form-group" ng-class="{'has-error' : add_user.user_name.$invalid && !add_user.user_name.$pristine}">
+                        <div class="form-group" ng-class="{'has-error' : register.user_name.$invalid && !register.user_name.$pristine}">
                             <label for="inputUserName">Tên đăng nhập: </label><i>(*)</i>
-                            <input name="user_name" type="text" class="form-control" id="inputUserName" placeholder="Tên đăng nhập" ng-model="user.userName" required>
+                            <input name="user_name" type="text" class="form-control" id="inputUserName" placeholder="Tên đăng nhập" ng-model="users.username" required>
                         </div>
-                        <div class="form-group" ng-class="{'has-error' : add_user.user_pass.$invalid && !add_user.user_pass.$pristine}">
+                        <div class="form-group" ng-class="{'has-error' : register.email.$invalid && !register.email.$pristine}">
+                            <label for="inputEmail">Email: </label><i>(*)</i>
+                            <input name="email" type="email" class="form-control" id="inputEmail" placeholder="Email" data-ng-model="users.email" required>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error' : register.user_pass.$invalid && !register.user_pass.$pristine}">
                             <label for="inputPass">Mật khẩu: </label><i>(*)</i>
-                            <input name="user_pass" type="password" class="form-control" id="inputPass" placeholder="Mật khẩu" ng-model="user.userPass" required>
+                            <input name="password" type="password" class="form-control" id="inputPass" placeholder="Mật khẩu" ng-model="users.password" required>
                         </div>
-                        <div class="form-group" ng-class="{'has-error' : add_user.pass_confirm.$invalid && !add_user.pass_confirm.$pristine}">
+                        <div class="form-group" ng-class="{'has-error' : register.pass_confirm.$invalid && !register.pass_confirm.$pristine}">
                             <label for="inputPassConfirm">Nhắc lại mật khẩu: </label><i>(*)</i>
-                            <input name="pass_confirm" type="password" class="form-control" id="inputPassConfirm" placeholder="Mật khẩu" ng-model="user.userPassConfirm" required>
+                            <input name="pass_confirm" type="password" class="form-control" id="inputPassConfirm" placeholder="Mật khẩu" ng-model="users.userPassConfirm" required>
                         </div>
-                        <div class="form-group" ng-class="{'has-error' : add_user.full_name.$invalid && !add_user.full_name.$pristine}">
+                        <div class="form-group" ng-class="{'has-error' : register.full_name.$invalid && !register.full_name.$pristine}">
                             <label for="inputFullName">Họ và Tên: </label><i>(*)</i>
-                            <input anme="full_name" type="text" class="form-control" id="inputFullName" placeholder="Họ và Tên" ng-model="user.fullName" required>
+                            <input anme="full_name" type="text" class="form-control" id="inputFullName" placeholder="Họ và Tên" ng-model="users.fullName" required>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error' : register.role.$invalid && !register.role.$pristine}">
+                            <label for="role">Quyền: </label><i>(*)</i>
+                            <input anme="role" type="text" class="form-control" id="role" placeholder="Quyền" ng-model="users.role" required>
                         </div>
                     </div>
                     <div class="col-md-6">
-                		<div class="form-group" ng-class="{'has-error' : add_user.birth_day.$invalid && !add_user.birth_day.$pristine}">
+                        <div class="form-group" ng-class="{'has-error' : register.sex.$invalid && !register.sex.$pristine}">
+                            <label>Giới tính:</label><i>(*)</i>
+                            <select class="form-control" name="sex" ng-model="users.sex" ng-options="sex.value for sex in sexs">
+                            </select>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error' : register.birthday.$invalid && !register.birthday.$pristine}">
                             <label for="inputBirthDay">Ngày sinh: </label><i>(*)</i><br/>
-                            <input name="birth_day" type="text" placeholder="Ngày sinh" class="form-control" required>
+                            <input name="birthday" type="date" placeholder="Ngày sinh" class="form-control" ng-model="users.birthday" required>
                         </div>
-                        <div class="form-group" ng-class="{'has-error' : add_user.email.$invalid && !add_user.email.$pristine}">
-                            <label for="inputEmail">Email: </label><i>(*)</i>
-                            <input name="email" type="email" class="form-control" id="inputEmail" placeholder="Email" data-ng-model="user.email" required>
-                        </div>
-                        <div class="form-group" ng-class="{'has-error' : add_user.address.$invalid && !add_user.address.$pristine}">
+                        <div class="form-group" ng-class="{'has-error' : register.address.$invalid && !register.address.$pristine}">
                             <label for="inputAddress">Địa chỉ: </label><i>(*)</i>
-                            <input name="address" type="text" class="form-control" id="inputAddress" placeholder="Địa chỉ" ng-model="user.address" required>
+                            <input name="address" type="text" class="form-control" id="inputAddress" placeholder="Địa chỉ" ng-model="users.addr" required>
                         </div>
-                        <div class="form-group" ng-class="{'has-error' : add_user.phone.$invalid && !add_user.phone.$pristine}">
+                        <div class="form-group" ng-class="{'has-error' : register.phone.$invalid && !register.phone.$pristine}">
                             <label for="inputPhone">Điện thoại: </label><i>(*)</i>
-                            <input name="phone" type="text" class="form-control" id="inputPhone" placeholder="Điện thoại" ng-model="user.phone" required>
+                            <input name="phone" type="text" class="form-control" id="inputPhone" placeholder="Điện thoại" ng-model="users.phone" required>
+                        </div>
+                        <div class="form-group" ng-class="{'has-error' : register.avatar.$invalid && !register.avatar.$pristine}">
+                            <label for="inputPhone">Ảnh đại diện: </label><i>(*)</i>
+                            <input name="avatar" type="text" class="form-control" id="inputPhone" placeholder="Ảnh đại diện" ng-model="users.avatar" required>
                         </div>
                     </div>
                 </div>
                 <div class="row-fluid">
                     <button type="submit"
                                 class="btn btn-success btn-w-md"
-                                ng-disabled="add_user.$invalid"
-                                >Thêm mới</button>
+                                ng-disabled="register.$invalid"
+                                ng-click="addUser(users)">Thêm mới</button>
                 </div>
             </form>
         </div>
     </section>
 </div>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Message</h3>
+    </div>
+    <div class="modal-body">
+        {{message}}
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <!-- <button class="btn btn-warning" ng-click="cancel()">Cancel</button> -->
+    </div>
+</script>

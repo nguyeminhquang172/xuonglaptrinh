@@ -57,7 +57,7 @@
                 <tr>
                     <td colspan="2">
                         <a ui-sref="app.session({courseId: '{{course.id}}' })" ng-click="setLocalCourseID(course.id)"><button class="btn btn-success"><span class="glyphicon glyphicon-eye-open"></span> Xem nội dung</button></a>
-                        <a ui-sref="register" ng-click="registerCourse(course.id); download()"><button class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Đăng ký</button></a>
+                        <a ui-sref="register" ng-click="registerCourse(course.id, course.tutionFee)"><button class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Đăng ký</button></a>
                         <!-- <a ui-sref="editCourse"><button class="btn btn-success" ng-click="getId(course.id)"><span class="glyphicon glyphicon-edit"></span> Sửa</button></a>
                         <a ui-sref="viewListChild"><button class="btn btn-success"><span class="glyphicon glyphicon-cog"></span> Quản lý</button></a>
                         <button-delete></btn-delete> -->
@@ -69,3 +69,16 @@
         </section>
     </div>
 </div>
+
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Message</h3>
+    </div>
+    <div class="modal-body">
+        Dang ky khoa hoc thanh cong
+    </div>
+    <div class="modal-footer">
+        <!-- <button class="btn btn-primary" ng-click="ok()">OK</button> -->
+        <button class="btn btn-warning" ng-click="cancel()">OK</button>
+    </div>
+</script>
