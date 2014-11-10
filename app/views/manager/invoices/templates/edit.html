@@ -1,66 +1,37 @@
-<div ui-view></div>
-<div class="page page-invoice">
-
-    <div class="invoice-wrapper">
-        <section class="invoice-container" id="invoice">
-
-            <div class="invoice-inner">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <p class="size-h2">{{main.brand}}</p>
-                        <p class="text-muted">Less code - More software </p>
-                    </div>
-                    <div class="col-xs-6 text-right">
-                        <p class="size-h2">INVOICE NO. #00105</p>
-                        <p>21st August 2014</p>
+<section class="panel panel-default">
+    <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Cập nhật hóa đơn - <span class="myTitle">{{getLocalTitle()}}</span></strong></div>
+    <div class="panel-body">
+        <form name="updateInvoice" role="form" class="ng-pristine ng-valid" novalidate>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group" >
+                        <label for="inputCollected">Đã thu</label>
+                        <input type="text" class="form-control" id="inputCollected" placeholder="Đã thu" ng-model="datas.collected">
                     </div>
                 </div>
-
-                <hr>
-
-                <div class="row">
-                    <div class="col-xs-6">
-                        {{dataInvoice.name}} <br>
-                        {{dataInvoice.address}} <br>
-                        {{dataInvoice.phone}} <br>
-                        {{dataInvoice.email}}
-
-                    </div>
-                    <div class="col-xs-6 text-right">
-                        <p><strong>Order Details:</strong></p>
-                        <strong>Date:</strong> {{dataInvoice.date}} <br>
-                        <strong>Course:</strong> {{dataInvoice.detail.course}} <br>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="date">Ngày thu</label>
+                        <input type="text" class="form-control" id="date" placeholder="Ngày thu" ng-model="datas.dateBill">
                     </div>
                 </div>
-
-                <div class="divider divider-lg"></div>
-
-                <table class="table table-bordered table-striped">
-                    <thead>
-                    <tr class="bg-dark">
-                        <th class="text-center">#</th>
-                        <th>Course</th>
-                        <th class="text-center">Unit Cost</th>
-                        <th class="text-center">Discounts</th>
-                        <th class="text-center">Total</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="text-center">{{$index}}</td>
-                        <td>{{dataInvoice.detail.course}}</td>
-                        <td class="text-center">{{dataInvoice.detail.unitCost}}</td>
-                        <td class="text-center">{{dataInvoice.detail.discounts}}</td>
-                        <td class="text-center">{{dataInvoice.detail.total}}</td>
-                    </tr>
-
-                    </tbody>
-                </table>
             </div>
-        </section>
-
-        <section class="text-center no-print">
-            <a href="" ng-click="printInvoice()" class="btn btn-primary btn-lg btn-w-lg"><i class="fa fa-print"></i> Print</a>
-        </section>
+            <div class="row-fluid">
+                <button type="submit"
+                    class="btn btn-success btn-w-md"
+                    ng-disabled="updateInvoice.$invalid" ng-click="update(datas)">Update</button>
+            </div>
+        </form>
     </div>
-</div>
+</section>
+<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Message</h3>
+    </div>
+    <div class="modal-body">
+        {{message}}
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok('back')">OK</button>
+    </div>
+</script>

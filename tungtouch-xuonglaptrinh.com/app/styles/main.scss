@@ -1,0 +1,79 @@
+html,a,p,strong,i,em,div,span {
+  font-family: "Roboto";
+}
+
+a {
+  color: #A0D468;
+}
+
+a:hover, a:focus, a:active {
+  color: #8CC152;
+}
+
+.navbar-top {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.homeSlide {
+  min-height: 500px;
+  width: 100%;
+}
+
+.homeSlide1 {
+  background: url("/images/slide-1.jpg") bottom center no-repeat;
+  min-height: 600px;
+  width: 100%;
+  padding-top: 75px;
+}
+
+.btn-navtop {
+  margin-left: 40px;
+}
+
+.btn-navtop a {
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.btn-navtop a button {
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.btn-navtop a .goToClass {
+  background: transparent;
+  border: 1px solid #AAA;
+  color: #AAA;
+}
+
+.btn-navtop a .goToClass:hover {
+  color: #80bd01;
+  border-color: #80bd01;
+}
+
+.btn-navtop a .regCourses {
+  background: transparent;
+  border: 1px solid #80bd01;
+  color: #80bd01;
+}
+
+.btn-navtop a .regCourses:hover {
+  background: #80bd01;
+  border-color: #4a7301;
+  color: #fff;
+}
+
+.menu-navtop a {
+  font-size: 13px;
+  text-transform: uppercase;
+}
+.navbar-collapse .dropdown-menu {
+  background: rgba(0,0,0,0.7);
+}
+.navbar-collapse .dropdown-menu a:hover{
+  background: #A0D468;
+}
+#navbar-collapse-web .dropdown:hover .dropdown-menu {
+  display: block;
+}
+

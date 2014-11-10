@@ -1,13 +1,13 @@
-<div class="col-md-6" ng-repeat="course in datas | filter:searchText">
+<div class="col-md-6" ng-repeat="course in datas">
     <div class="panel panel-profile">
         <div class="panel-heading bg-success clearfix">
             <a href="" class="pull-left profile">
-                <img alt="" src="{{course.image_view}}" class="img-circle img80_80">
+                <img alt="" ng-src="images/{{course.image}}" class="img-circle img80_80">
             </a>
-            <h3>{{course.title}}{{searchText}}</h3>
+            <h3>{{course.title}}</h3>
             <p>{{course.subtitle}}</p>
         </div>
-        <section class="table-flip-scroll">
+        <section>
             <table class="table table-bordered course">
               <tbody>
                 <tr>
@@ -42,11 +42,15 @@
                 </tr>
                 <tr>
                   <td>Khai giảng: </td>
-                  <td>{{course.startDate}}</td>
+                  <td>{{course.startDate | date:'dd/M/yyyy'}}</td>
                 </tr>
                 <tr>
                     <td>giờ học: </td>
                     <td>{{course.startTime}}</td>
+                </tr>
+                <tr>
+                    <td>Hình thức: </td>
+                    <td>{{course.location}}</td>
                 </tr>
                 <tr>
                   <td>Lưu ý</td>
@@ -75,7 +79,7 @@
         <h3 class="modal-title">Message</h3>
     </div>
     <div class="modal-body">
-        Dang ky khoa hoc thanh cong
+        {{message}}
     </div>
     <div class="modal-footer">
         <!-- <button class="btn btn-primary" ng-click="ok()">OK</button> -->

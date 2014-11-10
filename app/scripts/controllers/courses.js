@@ -9,12 +9,16 @@ angular .module('app')
 				return arrParams;
 			}
 		}])
-		.controller('addCourse', ['$scope', 'httpAdd', '$modal',
-		function($scope, httpAdd, $modal){
+		.controller('addCourse', ['$scope', 'httpAdd', '$modal', 'modalFac',
+		function($scope, httpAdd, $modal, modalFac){
+			$scope.courseStatus = [{status: 'Online'}, {status: 'Offline'}];
+			$scope.course = {};
+			$scope.course.location = $scope.courseStatus[1];
 			$scope.addCourse = function(course){
-				httpAdd.httpFn('courses', course, function(status){
+				httpAdd.httpFn('courses', course,
+				function(status){
 					if(200 === status){
-						// $modal.open('sm');
+						modalFac.modalOpen('Thêm khóa học thành công')
 					}
 				})
 
@@ -23,9 +27,10 @@ angular .module('app')
 		.controller('editCourse', ['$scope', '$stateParams', '$http', 'appConfig', 'httpFac',
 		function($scope, $stateParams, $http, appConfig, httpFac){
 			$scope._id = $stateParams.courseId;
-			httpFac.httpFn('courses', 'get', $scope.courseId, function(result){
+			console.log('courses id: ', $scope._id);
+			/*httpFac.httpFn('courses', 'get', $scope.courseId, function(result){
 				$scope.courseTitle = result.title;
-			})
+			})*/
 			$scope.test = function(){
 				var arrParams = [
 						{urlApi: appConfig.apiHost+'/courses/'+$scope._id},
@@ -42,7 +47,7 @@ angular .module('app')
 				return arrParams;
 			};
 		}])
-		.controller('listCourse', ['$scope', 'appConfig', function($scope, appConfig){
+/*		.controller('listCourse', ['$scope', 'appConfig', function($scope, appConfig){
 			$scope.test = function(){
 				var arrParams = [
 						{urlApi: appConfig.apiHost+'/courses'},
@@ -50,10 +55,18 @@ angular .module('app')
 					];
 				return arrParams;
 			}
-		}])
-		.controller('addSession', ['$scope', 'httpAdd', '$modal', '$stateParams', 'httpFac', 'modalFac',
-		function($scope, httpAdd, $modal, $stateParams, httpFac, modalFac){
+		}])*/
+		.controller('addSession', ['$scope', 'httpAdd', '$modal', '$stateParams', 'httpFac', 'modalFac', 'status', 'modalFac',
+		function($scope, httpAdd, $modal, $stateParams, httpFac, modalFac, status, modalFac){
 			$scope.courseId = $stateParams.courseId;
+
+			$scope.status = status.status;
+			$scope.session = {};
+			$scope.session.practice = {};
+			$scope.session.slide = {};
+			$scope.session.practice.status =$scope.status[1]
+			$scope.session.slide.status =$scope.status[1]
+
 			httpFac.httpFn('courses', 'get', $scope.courseId, function(result){
 				$scope.session = {};
 				$scope.courseTitle = result.title;
@@ -62,7 +75,9 @@ angular .module('app')
 			$scope.addSession = function(session){
 				httpAdd.httpFn('chapters', session, function(status){
 					if(200 === status){
-						// $scope.open();
+						modalFac.modalOpen('Thêm chapter thành công');
+					}else{
+						modalFac.modalOpen('Có lỗi xảy ra');
 					}
 				})
 
@@ -103,7 +118,7 @@ angular .module('app')
 			$scope._id = $stateParams.courseId;
 			$scope.test = function(){
 				var arrParams = [
-						{urlApi: appConfig.apiHost+'/courses/'+$scope._id+'/users'},
+						{urlApi: appConfig.apiHost+'/user_courses/'+'?filter[where][courseID]='+$scope._id+'&filter[include]=users'},
 						{typeMethod: 'get'}
 					];
 				return arrParams;
@@ -120,7 +135,7 @@ angular .module('app')
 				return arrParams;
 			}
 		}])
-		.controller('editInvoice', ['$scope, $stateParams',
+/*		.controller('viewInvoice', ['$scope, $stateParams',
 		function($scope, $stateParams){
 			$scope._id = $stateParams.invoiceId;
 			$scope.getById = function(arr, id){
@@ -133,6 +148,25 @@ angular .module('app')
 				}
 				return data;
 			}
+		}])*/
+		.controller('editBill', ['$scope', '$stateParams', 'appConfig',
+		function($scope, $stateParams, appConfig){
+			$scope._id = $stateParams.billId;
+			$scope.test = function(){
+				var arrParams = [
+						{urlApi: appConfig.apiHost+'/bills/'+$scope._id},
+						{typeMethod: 'get'}
+					];
+				return arrParams;
+			};
+
+			$scope.update = function(){
+				var arrParams = [
+						{urlApi: appConfig.apiHost+'/bills/'+$scope._id},
+						{typeMethod: 'put'}
+					];
+				return arrParams;
+			};
 		}])
 		.controller('session', ['$scope', '$stateParams', 'appConfig',
 		function($scope, $stateParams, appConfig){
@@ -159,22 +193,50 @@ angular .module('app')
 				return arrParams;
 			}
 		}])
-		.controller('userProfile', ['$scope', '$stateParams', function($scope, $stateParams){
-			$scope._id = $stateParams.courseId;
-			$scope._id = '574301';
-			$scope.getById = function(arr, id){
-				var count = arr.length,
-					data = [];
-				for(var i=0; i<count; i++){
-					if(arr[i].id === id){
-						data.push(arr[i]);
-					}
-				}
-				return data;
+		.controller('userProfile', ['$scope', '$stateParams', 'User', 'appConfig',
+		function($scope, $stateParams, User, appConfig){
+			$scope._id = User.getCurrentId();
+			console.log('getCurrentId: ', $scope._id);
+			$scope.test = function(){
+				console.log('getCurrentId');
+				var arrParams = [
+						{urlApi: appConfig.apiHost+'/users/'+$scope._id},
+						{typeMethod: 'get'}
+					];
+				return arrParams;
 			}
 		}])
-		.controller('userInvoice', ['$scope', 'httpFac', function($scope, httpFac){
-
+		.controller('changePass', ['$scope', 'httpFac', 'User', 'modalFac',
+		function($scope, httpFac, User, modalFac){
+			$scope.changePass = function(user){
+				var userID = User.getCurrentId();
+				httpFac.httpFn('users', 'get', userID, function(data){
+					console.log('changePass: ', data);
+					if(data.email === user.email){
+						httpFac.httpUpdate('users', 'put', userID, user, function(result){
+							if(result == 200){
+								modalFac.modalOpen('Đổi mật khẩu thành công');
+							}else{
+								modalFac.modalOpen('Đã có lỗi xảy ra');
+							}
+						})
+					}else{
+						modalFac.modalOpen('Email này chưa đăng ký');
+					}
+				})
+			}
+		}])
+		.controller('userInvoice', ['$scope', '$stateParams', 'User', 'appConfig',
+		function($scope, $stateParams, User, appConfig){
+			$scope._id = User.getCurrentId();
+			$scope.test = function(){
+				var arrParams = [
+						{urlApi: appConfig.apiHost+'/users/'+$scope._id+'/bills'},
+						{typeMethod: 'get'},
+						{filterInclude: '?filter[include]=course'}
+					];
+				return arrParams;
+			}
 		}])
 		.controller('delSession', ['$scope', '$stateParams', 'appConfig',
 		function($scope, $stateParams, appConfig){
@@ -216,8 +278,8 @@ angular .module('app')
 				});
 			};
 		}])
-		.controller('addUser', ['$scope', '$modal', 'httpAdd',
-		function($scope, $modal, httpAdd){
+		.controller('addUser', ['$scope', '$modal', 'httpAdd', 'modalFac',
+		function($scope, $modal, httpAdd, modalFac){
 			$scope.sexs = [{id: 0, value: 'Nam'}, {id: 1, value: 'Nữ'}];
 			$scope.add_users = {sex: 'Nam'};
 
@@ -231,25 +293,7 @@ angular .module('app')
 						console.log('httpAdd.httpFn2')
 						console.log('result add_user: ', result);
 						if(result === 200){
-							$scope.messages = 'Thêm mới thành công';
-							var modalInstance = $modal.open({
-								templateUrl: 'myModalContent.html',
-								controller: 'ModalInstanceCtrl',
-								size: 'sm',
-								resolve: {
-									messages: function () {
-										return $scope.messages = 'Thêm mới thành công';
-									}
-								}
-							});
-
-							modalInstance.result.then(function (selectedItem) {
-								console.log('ok: ', selectedItem);
-								$scope.add_user = '';
-							}, function () {
-								console.log('cancel');
-								$state.go('app.login');
-							});
+							modalFac.modalOpen('Thêm user thành công');
 						}else{
 							$scope.managerSession = 'Không thể thêm mới user, có lỗi xảy ra';
 						}
@@ -296,38 +340,24 @@ angular .module('app')
 				})
 			}
 		}])
-		.controller('register', ['$scope', 'httpAdd', '$modal',
-		function($scope, httpAdd, $modal){
-			$scope.sexs = [{id: 0, value: 'Nam'}, {id: 1, value: 'Nữ'}];
-			$scope.add_users = {sex: 'Nam'};
+		.controller('register', ['$scope', 'httpAdd', '$modal', '$state', 'modalFac',
+		function($scope, httpAdd, $modal, $state, modalFac){
+
+			$scope.sexs = [{value: 'Nam'}, {value: 'Nữ'}];
+			$scope.users = {};
+			$scope.users.sex = $scope.sexs[0];
+			console.log('users.sex: ', $scope.users.sex);
 			$scope.registerFn = function(user){
+				var sex = user.sex.value;
+					user.sex = sex;
 				console.log(user);
 				if(user.password !== user.userPassConfirm){
 					$scope.massageError = 'Nhắc lại mật khẩu không khớp';
 				}else{
-					console.log('httpAdd.httpFn')
 					httpAdd.httpFn('users', user, function(result){
-						console.log('httpAdd.httpFn2')
 						console.log('result register: ', result);
 						if(result === 200){
-							$scope.messages = 'Đăng lý thành công';
-							var modalInstance = $modal.open({
-								templateUrl: 'myModalContent.html',
-								controller: 'ModalInstanceCtrl',
-								size: 'sm',
-								resolve: {
-									messages: function () {
-										return $scope.messages = 'Đăng lý thành công';
-									}
-								}
-							});
-
-							modalInstance.result.then(function (selectedItem) {
-								console.log('ok: ', selectedItem);
-								$state.go('app.login');
-							}, function () {
-								console.log('cancel');
-							});
+							modalFac.modalOpen('Đăng ký thành công');
 						}else{
 							$scope.managerSession = 'Lỗi đăng ký';
 						}
@@ -335,13 +365,24 @@ angular .module('app')
 				}
 			}
 		}])
-		.controller('ModalInstanceCtrl', function ($scope, $modalInstance, $state, messages) {
+		.controller('ModalInstanceCtrl',['$window', '$scope', '$modalInstance', '$state', 'messages',
+		function ($window, $scope, $modalInstance, $state, messages) {
 			$scope.message = messages;
-			$scope.ok = function () {
+			$scope.ok = function (agr) {
+				console.log('agr : ', agr);
+				if(agr == 'back'){
+					$window.history.back();
+				}else if(!agr){
+
+				}
+				else{
+					$state.go(agr);
+				}
 				$modalInstance.close($scope.message);
 			};
-			$scope.cancel = function () {
+			$scope.cancel = function (agr) {
+				console.log('cancel agr');
 				$modalInstance.dismiss('cancel');
 			};
-		})
+		}])
 ;

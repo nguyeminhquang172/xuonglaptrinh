@@ -14,10 +14,12 @@
 
 
             <!-- build:css({.tmp,client}) styles/main.css -->
+
             <link rel="stylesheet" href="styles/bootstrap.css">
             <link rel="stylesheet" href="styles/ui.css">
             <link rel="stylesheet" href="styles/main.css">
             <link rel="stylesheet" href="styles/xuonglaptrinh.css">
+
             <!-- endbuild -->
             <style>
             /* .fade.in {
@@ -36,6 +38,7 @@
         <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
         <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
         <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+        <script src="bower_components/angular-loading-bar/src/loading-bar.js"></script>
         <!-- endbuild -->
     <body data-ng-app="app"
           id="app"
@@ -45,16 +48,18 @@
           data-ng-controller="AppCtrl"
           data-ng-class=" {'layout-boxed': admin.layout === 'boxed' } "
           >
-        <section >
-          <div ui-view="header" id="header" class="header-container " data-ng-class=" {'header-fixed': admin.fixedHeader} "></div>
+        <section ui-view="header" id="header"
+                 class="header-container "
+                 data-ng-class=" {'header-fixed': admin.fixedHeader} ">
         </section>
         <div class="main-container">
           <aside id="nav-container"
-            class="nav-container"
-            data-ng-class=" {'nav-horizontal': admin.menu === 'horizontal', 'nav-vertical': admin.menu === 'vertical'}">
+                   class="nav-container"
+                   data-ng-class=" {'nav-fixed': admin.fixedSidebar, 'nav-horizontal': admin.menu === 'horizontal', 'nav-vertical': admin.menu === 'vertical'}">
             <div ui-view="navbar" ></div>
           </aside>
-          <aside ui-view="mainContain" id="content" class="content-container"></aside>
+          <section ui-view="mainContain" id="content"
+                     class="content-container {{admin.pageTransition.class}}"></section>
         </div>
         <!-- endbuild -->
 

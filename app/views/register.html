@@ -30,9 +30,15 @@
                     <div class="col-md-6">
                         <div class="form-group" ng-class="{'has-error' : register.sex.$invalid && !register.sex.$pristine}">
                             <label>Giới tính:</label><i>(*)</i>
-                            <select class="form-control" name="sex" ng-model="users.sex" ng-options="sex.value for sex in sexs">
+                            <select class="form-control" name="sex" ng-model="users.sex" ng-options="s.value for s in sexs">
                             </select>
                         </div>
+
+
+
+
+
+
                 		<div class="form-group" ng-class="{'has-error' : register.birthday.$invalid && !register.birthday.$pristine}">
                             <label for="inputBirthDay">Ngày sinh: </label><i>(*)</i><br/>
                             <input name="birthday" type="date" placeholder="Ngày sinh" class="form-control" ng-model="users.birthday" required>
@@ -69,7 +75,7 @@
         {{message}}
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="ok()">OK</button>
+        <button class="btn btn-primary" ng-click="ok('app.login')">OK</button>
         <!-- <button class="btn btn-warning" ng-click="cancel()">Cancel</button> -->
     </div>
 </script>

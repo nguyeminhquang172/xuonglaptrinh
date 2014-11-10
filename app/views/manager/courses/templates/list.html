@@ -2,19 +2,19 @@
     <section class="panel panel-default">
         <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Danh sách khóa học</strong></div>
        <div class="panel-body">
-            <div class="col-md-12 addNew">
+            <div class="col-md-12 addNew" ng-show="isTeacher()">
                 <a ui-sref="app.addCourse"><button type="button" class="btn btn-primary">Add New</button></a>
             </div>
             <table class="table table-bordered table-striped">
                 <thead>
                 <tr class="bg-dark">
                     <th class="text-center">#</th>
-                    <th class="text-center" ng-click="predicate='title'; reverse=!reverse">Title</th>
-                    <th class="text-center">Teacher</th>
-                    <th class="text-center">Tuition-fee</th>
-                    <th class="text-center">Sale of</th>
-                    <th class="text-center">Day learn</th>
-                    <th class="text-center">Dtart date</th>
+                    <th class="text-center" ng-click="predicate='title'; reverse=!reverse">Khóa học</th>
+                    <th class="text-center">Giáo viên</th>
+                    <th class="text-center">Học phíc</th>
+                    <th class="text-center">Giảm</th>
+                    <th class="text-center">Buổi học</th>
+                    <th class="text-center">Khai giảng</th>
                     <th class="text-center">Actions</th>
                 </tr>
                 </thead>
@@ -26,20 +26,20 @@
                     <td class="text-center">{{course.tutionFee}}</td>
                     <td class="text-center">{{course.saleOff}}</td>
                     <td class="text-center">{{course.dayLearn}}</td>
-                    <td class="text-center">{{course.startDate}}</td>
+                    <td class="text-center">{{course.startDate | date:'dd/M/yyyy'}}</td>
                     <th class="text-center">
 
-                        <a ui-sref="app.viewCourse({courseId: '{{course.id}}'})" class="btn-icon bg-success" ng-click="getId(course.id)"><i class="glyphicon glyphicon-eye-open"></i></a>
+                        <!-- <a ng-hide="isAdmin()" ui-sref="app.viewCourse({courseId: '{{course.id}}'})" class="btn-icon bg-success" ng-click="getId(course.id)" popover="Detail" popover-trigger="mouseenter"><i class="glyphicon glyphicon-eye-open"></i></a> -->
 
-                        <a ng-click="setLocalTitle(course.title)" ui-sref="app.editCourse({courseId: '{{course.id}}'})" class="btn-icon bg-success"><i class="glyphicon glyphicon-edit"></i></a>
+                        <a ng-hide="isAdmin()" ng-click="setLocalTitle(course.title)" ui-sref="app.editCourse({courseId: '{{course.id}}'})" class="btn-icon bg-success" popover="Edit" popover-trigger="mouseenter"><i class="glyphicon glyphicon-edit"></i></a>
 
-                        <a ng-hide="isTeacher()" href="javascript:;" class="btn-icon bg-success" ng-click="open(datas, $index, course.id)"><i class="glyphicon glyphicon-trash"></i></a>
+                        <a ng-hide="isAdmin()" href="javascript:;" class="btn-icon bg-success" ng-click="open(datas, $index, course.id)" popover="Delete" popover-trigger="mouseenter"><i class="glyphicon glyphicon-trash"></i></a>
 
-                        <a ng-click="setLocalTitle(course.title)" ui-sref="app.managerSession({courseId: '{{course.id}}'})" class="btn-icon bg-success"><i class="glyphicon glyphicon-list"></i></a>
+                        <a ng-hide="isAdmin()" ng-click="setLocalTitle(course.title)" ui-sref="app.managerSession({courseId: '{{course.id}}'})" class="btn-icon bg-success" popover="Chapters" popover-trigger="mouseenter"><i class="glyphicon glyphicon-list"></i></a>
 
-                        <a ng-click="setLocalTitle(course.title)" ui-sref="app.managerUserCourse({courseId: '{{course.id}}'})" class="btn-icon bg-success"><i class="glyphicon glyphicon-user"></i></a>
+                        <a ng-click="setLocalTitle(course.title)" ui-sref="app.managerUserCourse({courseId: '{{course.id}}'})" class="btn-icon bg-success" popover="Students" popover-trigger="mouseenter"><i class="glyphicon glyphicon-user"></i></a>
 
-                        <a ng-hide="isTeacher()" ng-click="setLocalTitle(course.title)" ui-sref="app.managerBillCourse({courseId: '{{course.id}}'})" class="btn-icon bg-success"><i class="glyphicon glyphicon-euro"></i></a>
+                        <a ng-hide="isTeacher()" ng-click="setLocalTitle(course.title); setLocalTutionFee(course.tutionFee)" ui-sref="app.managerBillCourse({courseId: '{{course.id}}'})" class="btn-icon bg-success" popover="Invoices" popover-trigger="mouseenter"><i class="glyphicon glyphicon-euro"></i></a>
                     </th>
                 </tr>
                 </tbody>

@@ -22,7 +22,7 @@
                     </div>
                     <div class="form-group">
                         <label for="inputDateStart">Khai giảng</label>
-                        <input type="date" class="form-control" id="inputDateStart" ng-model="datas.startDate">
+                        <input type="date" class="form-control" id="inputDateStart" ng-model="datas.startDate" value="{{ datas.startDate | date: 'yyyy-MM-dd' }}">
                     </div>
                     <div class="form-group" ng-class="{'has-error' : add_course.subTitle.$invalid && !add_course.subTitle.$pristine}">
                         <label for="inputLocation">Hình thức</label>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="form-group" ng-class="{'has-error' : add_course.avatar.$invalid && !add_course.avatar.$pristine}">
                         <label for="inputIcon">Icon</label>
-                        <input name="avatar" type="url" class="form-control" id="inputIcon" placeholder="Url icon" ng-model="datas.image" required>
+                        <input name="avatar" type="text" class="form-control" id="inputIcon" placeholder="images/courses/image.type" ng-model="datas.image" required>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputSummaryContents">Tóm tắt nội dung</label>
@@ -82,9 +82,9 @@
         <h3 class="modal-title">Message</h3>
     </div>
     <div class="modal-body">
-        Cập nhật khóa học thành công !
+        {{message}}
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="cancel('back')">OK</button>
+        <button class="btn btn-primary" ng-click="ok('back')">OK</button>
     </div>
 </script>

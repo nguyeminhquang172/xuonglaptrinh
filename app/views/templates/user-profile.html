@@ -1,11 +1,10 @@
-<div class="row" ng-repeat="data in datas">
+<div class="row">
     <div class="col-md-6">
 
         <section class="panel panel-box">
             <div class="panel-top bg-primary">
                 <div class="text-center">
-                    <h3>User : {{data.full_name}}</h3>
-                    <p>MemberShip Lab Coder : {{abd}}</p>
+                    <h3>User : {{datas.fullName}}</h3>
                 </div>
                 <div class="divider divider-lg"></div>
                 <div class="divider divider-lg"></div>
@@ -16,17 +15,17 @@
             <div class="list-justified-container">
                 <ul class="list-justified text-center">
                     <li>
-                        <a href="http://fb.com/tungtouch" style="color: #3c5a99">
+                        <a href="https://www.facebook.com/" style="color: #3c5a99">
                            <span class="icon fa fa-3x fa-facebook-square"></span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" style="color: #0084b4;">
+                        <a href="https://twitter.com/" style="color: #0084b4;">
                         <span class="icon fa fa-3x fa-twitter-square"></span>
                         </a>
                     </li>
                     <li>
-                        <a href="#" style="color: #d95433">
+                        <a href="https://plus.google.com/" style="color: #d95433">
                         <span class="icon fa fa-3x fa-google-plus-square"></span>
                         </a>
                     </li>
@@ -44,41 +43,36 @@
                         <ul class="list-unstyled list-info">
                             <li>
                                 <span class="icon glyphicon glyphicon-user"></span>
-                                <label>Name</label>
-                                {{data.full_name}}
+                                <label>Họ tên:</label>
+                                {{datas.fullName}}
                             </li>
                             <li>
-                                <span class="icon glyphicon glyphicon-envelope"></span>
-                                <label>Email</label>
-                                {{data.email}}
+                                <span class="icon glyphicon glyphicon-th"></span>
+                                <label>Ngày sinh:</label>
+                                {{datas.birthday | date:'dd/M/yyyy'}}
                             </li>
                             <li>
-                                <span class="icon glyphicon glyphicon-home"></span>
-                                <label>Address</label>
-                                {{data.address}}
+                                <span class="icon glyphicon glyphicon-heart"></span>
+                                <label>Giới tính:</label>
+                                {{datas.sex}}
                             </li>
                             <li>
                                 <span class="icon glyphicon glyphicon-earphone"></span>
-                                <label>Mobile</label>
-                                {{data.phone}}
+                                <label>Điện thoại:</label>
+                                {{datas.phone}}
                             </li>
                             <li>
-                                <span class="icon fa fa-facebook-square"></span>
-                                <label>Facebook: </label>
-                                <a href="#">{{data.facebook}}</a>
+                                <span class="icon glyphicon glyphicon-envelope"></span>
+                                <label>Email:</label>
+                                {{datas.email}}
                             </li>
                             <li>
-                                <span class="icon fa fa-twitter-square"></span>
-                                <label>Twitter: </label>
-                                <a href="#">{{data.twitter}}</a>
+                                <span class="icon glyphicon glyphicon-home"></span>
+                                <label>Địa chỉ:</label>
+                                {{datas.addr}}
                             </li>
-                            <li>
-                                <span class="icon fa fa-google-plus-square"></span>
-                                <label>Google: </label>
-                                <a href="#">{{data.google}}</a>
-                            </li>
-                        </ul>
 
+                        </ul>
                     </div>
                 </div>
             </div>

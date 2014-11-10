@@ -24,11 +24,13 @@
                     <td class="text-center">{{session.teacher}}</td>
                     <td class="text-center">{{session.slide.status}}</td>
                     <td class="text-center">{{session.practice.status}}</td>
-                    <td class="text-center">{{session.dateC}}</td>
+                    <td class="text-center">{{session.dateC | date:'dd/M/yyyy'}}</td>
                     <th class="text-center">
-                        <a ui-sref="app.viewSession({sessionId: '{{session.id}}'})" class="btn-icon bg-success" ng-click="getId('43')"><i class="glyphicon glyphicon-eye-open"></i></a>
-                        <a ui-sref="app.editSession({sessionId: '{{session.id}}'})" class="btn-icon bg-success"><i class="glyphicon glyphicon-edit"></i></a>
-                        <a href="javascript:;" class="btn-icon bg-success" ng-click="open(datas, $index, session.id)"><i class="glyphicon glyphicon-trash"></i></a>
+                        <a ui-sref="app.viewSession({sessionId: '{{session.id}}'})" class="btn-icon bg-success"  popover="Detail" popover-trigger="mouseenter"><i class="glyphicon glyphicon-eye-open"></i></a>
+
+                        <a ui-sref="app.editSession({sessionId: '{{session.id}}'})" class="btn-icon bg-success"  popover="Edit" popover-trigger="mouseenter"><i class="glyphicon glyphicon-edit"></i></a>
+
+                        <a href="javascript:;" class="btn-icon bg-success" ng-click="open(datas, $index, session.id)"  popover="Delete" popover-trigger="mouseenter"><i class="glyphicon glyphicon-trash"></i></a>
                     </th>
                 </tr>
                 </tbody>
@@ -45,7 +47,7 @@
         Bạn có chắc chắn muốn xóa bản ghi này ?
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="ok('session')">OK</button>
+        <button class="btn btn-primary" ng-click="ok('chapters')">OK</button>
         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
 </script>

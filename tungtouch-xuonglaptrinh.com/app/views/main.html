@@ -1,0 +1,82 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" id="nav-header">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" ng-click="isCollapsed = !isCollapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#"> <span class="fa fa-flask"></span> <span style="font-size: 18px;text-transform: uppercase; font-weight: 300;">Code Lab</span> </a>
+        </div>
+
+        <!-- Menu Dành Cho Mobile -->
+        <div class="hidden-lg hidden-md hidden-print hidden-sm">
+        <div class="collapse navbar-collapse" id="navbar-mobile" collapse="isCollapsed">
+            <ul class="nav navbar-nav menu-navtop menu-for-mobile">
+                <li class="active"><a href="#">TRANG CHỦ</a></li>
+                <li>
+                    <a ui-sref="main.introduction">Giới thiệu</a>
+                </li>
+                <li>
+                    <a href="http://localhost:9000/#/courses">Khóa học</a>
+                </li>
+                <li>
+                    <a ui-sref="main.admission">Tuyển sinh</span></a>
+                </li>
+                <li><a ui-sref="main.job">JOBS</a></li>
+            </ul>
+        </div>
+    </div>
+        <!-- /Kêt thúc Menu dành cho Mobile -->
+
+        <!-- Menu dành cho Web -->
+        <div class="collapse navbar-collapse navbar-right hidden-xs" id="navbar-collapse-web">
+            <ul class="nav navbar-nav menu-navtop menu-for-web">
+                <li ui-sref-active="active"><a ui-sref="main.home">TRANG CHỦ</a></li>
+                <li ui-sref-active="active">
+                    <a ui-sref="main.introduction">Giới thiệu</a>
+                </li>
+                <li>
+                    <a href="http://localhost:9000/#/courses">Khóa học</a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="main.admission">Tuyển sinh</a>
+                </li>
+                <li ui-sref-active="active"><a ui-sref="main.job">JOBS</a></li>
+            </ul>
+        </div>
+        <!-- / Kết thúc Menu dành cho Web -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div ui-view=""></div>
+
+
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 footer-item">
+                <div class="logo-footer">
+                    <a style="font-size: 26px;" href="#">{ <span class="fa fa-flask"></span> <span style="text-transform: uppercase; font-weight: 300;">Code Lab</span> }</a>
+                    <p><span style="color: #c0c0c0; margin-left: 10px; font-size: 13px;"> Less Code - More Software</i></span></p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-6 footer-item-1">
+
+            </div>
+
+            <div class="col-md-4 col-sm-4 col-xs-6 footer-item" style="color: #fff;">
+                <h5 style="font-weight: 400">CƠ SỞ HÀ NỘI</h5>
+                <ul class="list-unstyled">
+                    <li><i class="fa fa-map-marker"></i> : 131 Thái Thịnh - quận Đống Đa - Hà Nội</li>
+                    <li><i class="fa fa-mobile"></i> : 0912 64 6666</li>
+                    <li><i class="fa fa-envelope-o"></i> : daotao@xuonglaptrinh.com</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-copyright text-center">Copyright © 2014 <a href="http://xuonglaptrinh.com">XuongLapTrinh.Com</a> - All rights reserved.</div>
+    </div>
+</div>

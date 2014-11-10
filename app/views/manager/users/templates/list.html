@@ -2,9 +2,9 @@
         <section class="panel panel-default">
             <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Danh sách học viên của khóa học - <span class="myTitle">{{getLocalTitle()}}</span></strong></div>
             <div class="panel-body">
-                <div class="col-md-12 addNew">
-                    <a ui-sref="app.addUser"><button type="button" class="btn btn-primary">Add New</button></a>
-                </div>
+<!--                 <div class="col-md-12 addNew">
+    <a ng-hide="isTeacher()" ui-sref="app.addUser"><button type="button" class="btn btn-primary">Add New</button></a>
+</div> -->
                 <table class="table table-bordered table-striped">
                     <thead>
                     <tr class="bg-dark">
@@ -13,23 +13,52 @@
                         <th class="text-center">Ngày sinh</th>
                         <th class="text-center">Điện thoại</th>
                         <th class="text-center">Email</th>
-                        <th class="text-center">Quyền</th>
                         <th class="text-center">Địa chỉ</th>
-                        <th class="text-center">Actions</th>
+                        <th class="text-center" ng-hide="isTeacher()">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="user in datas">
+                    <tr ng-repeat="course in datas">
                         <td class="text-center">{{$index + 1}}</td>
-                        <td class="text-center">{{user.fullName}}</td>
-                        <td class="text-center">{{user.birthDay}}</td>
-                        <td class="text-center">{{user.phone}}</td>
-                        <td class="text-center">{{user.email}}</td>
-                        <td class="text-center">{{user.role}}</td>
-                        <td class="text-center">{{user.address}}</td>
-                        <th class="text-center">
-                            <a href="javascript:;" class="btn-icon bg-success" ng-click="open(datas, $index, user.id)"><i class="glyphicon glyphicon-trash"></i></a>
-                            <a ui-sref="app.updateUserCourse" class="btn-icon bg-success"><i class="glyphicon glyphicon-edit"></i></a>
+                        <td class="text-center">
+                            <table>
+                                <tr ng-repeat="user in course">
+                                    <td>{{user.fullName}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="text-center">
+                            <table>
+                                <tr ng-repeat="user in course">
+                                    <td>{{user.birthday | date:'dd/M/yyyy'}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="text-center">
+                            <table>
+                                <tr ng-repeat="user in course">
+                                    <td>{{user.phone}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="text-center">
+                            <table>
+                                <tr ng-repeat="user in course">
+                                    <td>{{user.email}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="text-center">
+                            <table>
+                                <tr ng-repeat="user in course">
+                                    <td>{{user.addr}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <th class="text-center" ng-hide="isTeacher()">
+                            <!-- <a ui-sref="app.updateUserCourse" class="btn-icon bg-success"  popover="Edit" popover-trigger="mouseenter"><i class="glyphicon glyphicon-edit"></i></a> -->
+
+                            <a href="javascript:;" class="btn-icon bg-success" ng-click="open(datas, $index, course.id)"  popover="Delete" popover-trigger="mouseenter"><i class="glyphicon glyphicon-trash"></i></a>
                         </th>
                     </tr>
                     </tbody>
@@ -38,15 +67,15 @@
         </section>
     </div>
 
-<script type="text/ng-template" id="myModalContent.html">
+<script type="text/ng-template" id="myModalContentDel.html">
     <div class="modal-header">
-        <h3 class="modal-title">Xác thực</h3>
+        <h3 class="modal-title">Confirm</h3>
     </div>
     <div class="modal-body">
         Bạn có chắc chắn muốn xóa bản ghi này ?
     </div>
     <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="ok('users')">OK</button>
+        <button class="btn btn-primary" ng-click="ok('user_courses')">OK</button>
         <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
 </script>

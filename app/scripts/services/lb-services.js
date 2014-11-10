@@ -36,6 +36,7 @@
                             response: function (response) {
                                 LoopBackAuth.clearUser();
                                 LoopBackAuth.save();
+                                console.log('response.resource: ', response.resource);
                                 return response.resource;
                             }
                         }
@@ -232,6 +233,7 @@
             }
 
             LoopBackAuth.prototype.clearUser = function () {
+                console.log('clearUser');
                 this.accessTokenId = null;
                 this.currentUserId = null;
                 this.currentUserData = null;

@@ -1,0 +1,32 @@
+.page {
+	padding: 60px;
+}
+
+.page .introduction ul li, .page .job ul li {
+	list-style: none;
+}
+
+.introduction ol li {
+	margin-bottom: 15px;
+}
+
+.page .job div:last-child, .page .admission div:last-child {
+	border-left: 1px solid #dce1e9;
+}
+
+.project {
+	border: 1px solid #dce1e9;
+	margin-bottom: 10px;
+	padding: 2px;
+}
+
+.project img {
+	padding-bottom: 5px;
+}
+
+.project h4 {
+	background: #256A9A;
+	color: white;
+	margin: 0px !important;
+	padding: 5px 10px;
+}

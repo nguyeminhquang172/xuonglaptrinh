@@ -24,14 +24,18 @@
                             <div class="row-fluid"><label for="inputSlideUrl">Bài giảng</label></div>
                             <div class="row">
                                 <div class="col-md-6"><input type="text" name="" id="inputSlideUrl" class="form-control" placeholder="Link tải bài giảng" ng-model="session.slide.url"></div>
-                                <div class="col-md-6"><input type="text" name="" id="inputSlideUrl" class="form-control" placeholder="Trạng thái" ng-model="session.slide.status"></div>
+                                <div class="col-md-6">
+                                    <select ng-model="session.slide.status" ng-options="st.status for st in status" class="form-control"></select>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="row-fluid"><label for="inputPractive">Bài tập</label></div>
                             <div class="row">
                                 <div class="col-md-6"><input type="text" class="form-control" id="inputPractive" placeholder="Link tải bài tập" ng-model="session.practive.url"></div>
-                                <div class="col-md-6"><input type="text" class="form-control" id="inputPractive" placeholder="Trạng thái" ng-model="session.practice.status"></div>
+                                <div class="col-md-6">
+                                    <select ng-model="session.practice.status" ng-options="st.status for st in status" class="form-control"></select>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -62,9 +66,10 @@
         <h3 class="modal-title">Message</h3>
     </div>
     <div class="modal-body">
-        Thêm mới buổi học thành công !
+        {{message}}
     </div>
     <div class="modal-footer">
-        <button class="btn btn-warning" ng-click="cancel('back')">Về trang trước</button>
+        <button class="btn btn-primary" ng-click="ok('back')">OK</button>
+        <button class="btn btn-warning" ng-click="cancel(session)">Tiếp</button>
     </div>
 </script>

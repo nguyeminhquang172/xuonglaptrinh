@@ -1,0 +1,133 @@
+<div class="homeSlide">
+    <div class="homeSlide1">
+        <div class="container">
+            <div class="slideEx1 row"
+                    >
+                <div class="col-md-1">
+
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="mocWeb hidden-xs">
+                        <img src="images/moc-web.png" class="img-responsive" alt=""/>
+                        <div class="contentEx">
+                            <form ng-submit="addText()">
+                            <input class="form-control" ng-enter="submitContentEx1()" placeholder="Hãy viết gì đó..." ng-model="itemContent">
+                            </form>
+                            <div class="listShow">
+                                <div class="media" ng-repeat="item in messages | limitTo: 4">
+                                    <a class="pull-left" href="#">
+                                        <img class="media-object img-circle" width="40px" height="40px" src="images/nhoc.jpg">
+                                    </a>
+                                    <div class="media-body">
+                                        <strong>User</strong>
+                                        <p>{{item.name}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-1">
+
+                </div>
+                <div class="col-md-2 col-xs-12 hidden-sm hidden-xs">
+                    <div class="mocMobile-one">
+                        <img src="images/moc-iphone.png" alt=""/>
+                        <div class="contentExMobile">
+                            <div class="mocweb-head"><strong>LabCoder</strong><span class="pull-right badge badge-danger">{{messages.length}}</span></div>
+                            <form ng-submit="addText()">
+                                <input class="form-control" ng-enter="submitContentEx1()" placeholder="Hãy viết gì đó..." ng-model="itemContent">
+
+                            </form>
+                            <div class="listShow">
+                                <div class="media" ng-repeat="item in messages | limitTo: 4">
+                                    <a class="pull-left" href="#">
+                                        <img class="media-object img-circle" width="40px" height="40px" src="images/nhoc.jpg">
+                                    </a>
+                                    <div class="media-body">
+                                        <strong>User</strong>
+                                        <p>{{item.name}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <!-- Courses -->
+    <div id="courses" class="row">
+        <h3> <i class="fa fa-graduation-cap"></i> KHÓA HỌC</h3>
+        <div class="courses">
+            <div class="col-sm-6 col-md-3">
+                <img src="images/node-courses.png" class="img-responsive" style="width: 100%; display: block; background-size:cover">
+                <div class="caption">
+                    <h4><a href="#">Lập trình Node.js</a></h4>
+                    <p>Ngày khai giảng (dự kiến): <i>10/9/2014</i></p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <img src="images/angular.jpg" class="img-responsive" class="img-responsive" style="width: 100%; display: block; background-size: cover">
+                <div class="caption">
+                    <h4><a href="#">Lập trình Angular.js</a></h4>
+                    <p>Ngày khai giảng (dự kiến): <i>10/9/2014</i></p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <img src="images/js.png" class="img-responsive" class="img-responsive" style="width: 100%; display: block; background-size: cover">
+                <div class="caption">
+                    <h4><a href="#">Lập trình Javascript</a></h4>
+                    <p>Ngày khai giảng (dự kiến): <i>10/9/2014</i></p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <img src="images/phonegap.png" class="img-responsive" class="img-responsive" style="width: 100%; display: block; background-size: cover">
+                <div class="caption">
+                    <h4><a href="#">Lập trình PhoneGap</a></h4>
+                    <p>Ngày khai giảng (dự kiến): <i>10/9/2014</i></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Projects -->
+    <div id="projects" class="row">
+        <h3> <i class="fa fa-flask"></i> DỰ ÁN</h3>
+        <div class="projects">
+            <div class="col-sm-6 col-md-3">
+                <img src="images/node-courses.png" class="img-responsive" style="width: 100%; display: block; background-size:cover">
+                <div class="caption">
+                    <h4><a href="#">Lập trình Node.js</a></h4>
+                    <p>Ngày khai giảng (dự kiến): <i>10/9/2014</i></p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <img src="images/angular.jpg" class="img-responsive" class="img-responsive" style="width: 100%; display: block; background-size: cover">
+                <div class="caption">
+                    <h4><a href="#">Lập trình Angular.js</a></h4>
+                    <p>Ngày khai giảng (dự kiến): <i>10/9/2014</i></p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <img src="images/js.png" class="img-responsive" class="img-responsive" style="width: 100%; display: block; background-size: cover">
+                <div class="caption">
+                    <h4><a href="#">Lập trình Javascript</a></h4>
+                    <p>Ngày khai giảng (dự kiến): <i>10/9/2014</i></p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <img src="images/phonegap.png" class="img-responsive" class="img-responsive" style="width: 100%; display: block; background-size: cover">
+                <div class="caption">
+                    <h4><a href="#">Lập trình PhoneGap</a></h4>
+                    <p>Ngày khai giảng (dự kiến): <i>10/9/2014</i></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

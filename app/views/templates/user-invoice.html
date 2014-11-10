@@ -1,0 +1,58 @@
+<div ui-view></div>
+<div class="page page-invoice">
+
+    <div class="invoice-wrapper">
+        <section class="invoice-container" id="invoice">
+            <div class="invoice-inner">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr class="bg-dark">
+                        <th class="text-center">#</th>
+                        <th>Khóa học</th>
+                        <th class="text-center">Học phí</th>
+                        <th class="text-center">Giảm</th>
+                        <th class="text-center">Giảm theo nhóm</th>
+                        <th class="text-center">Tổng</th>
+                        <th class="text-center">Đã thu</th>
+                        <th class="text-center">Ngày thu</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="invoice in datas">
+                        <td class="text-center">{{$index + 1}}</td>
+                        <td>
+                            <table>
+                                <tr ng-repeat="course in invoice">
+                                    <td>{{course.title}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            <table>
+                                <tr ng-repeat="course in invoice">
+                                    <td>{{course.tutionFee}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            <table>
+                                <tr ng-repeat="course in invoice">
+                                    <td>{{course.saleOff}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>{{invoice.saleGroup}}</td>
+                        <td>{{invoice.totalMount}}</td>
+                        <td>{{invoice.collected}}</td>
+                        <td>{{invoice.dateBill | date:'dd/M/yyyy'}}</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <!-- <section class="text-center no-print">
+            <a href="" ng-click="printInvoice()" class="btn btn-primary btn-lg btn-w-lg"><i class="fa fa-print"></i> Print</a>
+        </section> -->
+    </div>
+</div>

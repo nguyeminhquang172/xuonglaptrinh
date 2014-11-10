@@ -42,7 +42,7 @@
                 </tr>
                 <tr>
                   <td>Khai giảng: </td>
-                  <td>{{datas.startDate}}</td>
+                  <td>{{datas.startDate | date:'dd/M/yyyy'}}</td>
                 </tr>
                 <tr>
                     <td>giờ học: </td>
@@ -54,16 +54,12 @@
                 </tr>
                 </tbody>
                 <tbody>
-                <tr>
+                <!-- <tr>
                     <td colspan="2">
                         <a ui-sref="app.session({datasId: '{{datas.id}}' })"><button class="btn btn-success"><span class="glyphicon glyphicon-eye-open"></span> Xem nội dung</button></a>
                         <a ui-sref="register" ng-show="isLogined()"><button class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Đăng ký</button></a>
-                        <!-- <a ui-sref="editdatas"><button class="btn btn-success" ng-click="getId(datas.id)"><span class="glyphicon glyphicon-edit"></span> Sửa</button></a>
-                        <a ui-sref="viewListChild"><button class="btn btn-success"><span class="glyphicon glyphicon-cog"></span> Quản lý</button></a>
-                        <button-delete></btn-delete> -->
-                        <!-- <a ui-sref="datassDetail"><button class="btn btn-success"><span class="glyphicon glyphicon-trash"></span></button></a> -->
                     </td>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
         </section>

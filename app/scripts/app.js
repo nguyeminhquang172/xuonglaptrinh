@@ -3,10 +3,14 @@
   angular.module('app',
     [
       'ngRoute', 'ngAnimate', 'ui.bootstrap', 'app.controllers', 'app.localization',
-      'app.nav', 'app.ui.form.ctrls', 'ui.router', 'LocalStorageModule', 'lbServices'
+      'app.nav', 'app.ui.form.ctrls', 'ui.router', 'LocalStorageModule', 'lbServices',
+      'angular-loading-bar'
     ])
     .constant('appConfig', {
       apiHost: 'http://vsoft.vn:8888/api'
+    })
+    .constant('status', {
+      status: [{status: 'Public'}, {status: 'Private'}]
     })
     .config(['$stateProvider', '$urlRouterProvider', '$httpProvider',
       function($stateProvider, $urlRouterProvider, $httpProvider){
@@ -84,7 +88,7 @@
             accessLevel: window.userCan.accessManager
           })
           .state('app.session', {
-            url: '/course/:courseId.html',
+            url: '/course/:courseId/chapters',
             views: {
               'contenView': {
                 controller: 'session',
@@ -141,11 +145,11 @@
               }
             }
           })
-          .state('app.editInvoice', {
+          .state('app.viewInvoice', {
             url: '/manager/invoice/view/:invoiceId.html:',
             views: {
               'contenView': {
-                controller: 'editInvoice',
+                controller: 'viewInvoice',
                 templateUrl: 'views/manager/invoices/invoice-detail.html',
               }
             },
@@ -157,6 +161,16 @@
               'contenView' :{
                 controller: 'billOfCourse',
                 templateUrl: 'views/manager/invoices/lists.html'
+              }
+            },
+            accessLevel: window.userCan.accessManager
+          })
+          .state('app.editBill', {
+            url: '/manager/bill/edit/:billId',
+            views: {
+              'contenView' :{
+                controller: 'editBill',
+                templateUrl: 'views/manager/invoices/edit.html'
               }
             },
             accessLevel: window.userCan.accessManager
@@ -184,6 +198,16 @@
             views: {
               'contenView': {
                 templateUrl: 'views/manager/users/lists.html',
+                controller: 'managerUser'
+              }
+            },
+            accessLevel: window.userCan.accessManager
+          })
+          .state('app.allUser', {
+            url: '/manager/users/all',
+            views: {
+              'contenView': {
+                templateUrl: 'views/manager/users/all.html',
                 controller: 'managerUser'
               }
             },
@@ -241,6 +265,7 @@
             url: '/user/change-password',
             views: {
               'contenView': {
+                controller: 'changePass',
                 templateUrl: 'views/pages/change-password.html'
               }
             },
@@ -258,8 +283,8 @@
           $urlRouterProvider.otherwise('/learning/board.html')
       }
     ])
-  .run(['$rootScope', '$state', '$location', 'auth', 'User',
-  function($rootScope, $state, $location, auth, User){
+  .run(['$rootScope', '$state', '$location', 'auth', 'User', 'localStorageService',
+  function($rootScope, $state, $location, auth, User, localStorageService){
     $rootScope.$on('$stateChangeStart', function (event, to, toParams, fromState, from) {
 
       $rootScope.userInfo = {};
@@ -323,15 +348,14 @@
       return User.isAuthenticated();
     };
     $rootScope.logout = function(){
-      auth.clearLocalRole();
       User.logout();
+      localStorageService.clearAll();
       $rootScope.goToState('app.courses');
     };
   }])
   .factory('getFieldFac', ['$http', '$q', function($http, $q){
-    var defer = $q.defer();
     return {
-      getField: function(){
+      getField: function(callBack){
         var data = [{course1:'nodejs'}, {course2: 'angular'}];
         $http({
           method: 'get',
@@ -339,36 +363,72 @@
         })
         .success(function(result){
           console.log('result :', result);
-          defer.resolve(result);
+          callBack(result);
         })
         .error(function(err){
           console.log('err 2: ', err);
-          defer.reject(err);
+          callBack(err);
         });
-        return defer.promise;
       }
     }
   }])
-  .factory('httpFac', ['$http', 'appConfig', 'User', function($http, appConfig, User){
+  .factory('httpFac', ['$http', 'appConfig', 'User', '$q',
+  function($http, appConfig, User, $q){
     return {
+      httpGetMain: function(params, callBack){
+          var _url = '';
+          if(params[2]){
+            _url = params[0].urlApi + params[2].filterInclude
+            console.log('urlApi : ', _url);
+          }else{
+            _url = params[0].urlApi
+            console.log('urlApi : ', _url);
+          }
+          console.log('urlApi : ', _url);
+
+          $http({
+            url: _url,
+            method: params[1].typeMethod
+          })
+          .success(function(data){
+            console.log('data http : ', data);
+            callBack(data);
+              /*$scope.datas = data;
+              $scope.data = data;
+              $scope.courseName = {};*/
+          })
+          .error(function(err){
+            console.log('err : ', err);
+            callBack(err);
+          });
+      },
       httpFn: function(_table, _method, _id, callBack){
         $http({
           url: appConfig.apiHost+'/'+_table+'/'+_id,
           method: _method
         })
         .success(function(data){
-          console.log('delete success: ', data);
-          console.log('url : ', appConfig.apiHost+'/'+_table+'/'+_id);
           callBack(data);
-        },
-        function(error){
-          console.log('delete error: ', error);
-          callBack(error);
+        })
+        .error(function(err){
+          console.log('err delete: ', err);
+        });
+      },
+      httpUpdateCourseUser: function(_table, _method, _id, _filter, callBack){
+        $http({
+          url: appConfig.apiHost+'/'+_table+'/'+_id+'?filter[include]='+_filter,
+          method: _method
+        })
+        .success(function(data){
+          callBack(data);
+        })
+        .error(function(err){
+          console.log('err delete: ', err);
         });
       },
       httpTwoParams: function(_table, _method, callBack){
         $http({
-          url: appConfig.apiHost+'/'+_table+'/'+_id,
+          url: appConfig.apiHost+'/'+_table,
           method: _method
         })
         .success(function(data, status){
@@ -385,10 +445,11 @@
           method: _method,
           data: _data
         })
-        .success(function(status){
+        .success(function(data, status){
           callBack(status);
-        }, function(error){
-          callBack(error);
+        }, function(error, status){
+          console.log('err updateCourseForUser : ', error);
+          callBack(error, status);
         });
       },
       httpRegisterCourse: function(_courseID, _totalMount, callBack){
@@ -439,20 +500,25 @@
       }
     }
   }])
-  .factory('modalFac', ['$modal', function($modal){
+  .factory('modalFac', ['$rootScope', '$modal', function($rootScope, $modal){
       return {
-        open:function () {
+        modalOpen: function(sms){
           var modalInstance = $modal.open({
-            templateUrl: 'myModalContent.html',
-            controller: 'ModalInstanceCtrl',
-            size: 'sm'
-          });
+                templateUrl: 'myModalContent.html',
+                controller: 'ModalInstanceCtrl',
+                size: 'sm',
+                resolve: {
+                  messages: function () {
+                    return $rootScope.messages = sms;
+                  }
+                }
+              });
 
-          modalInstance.result.then(function (selectedItem) {
-            console.log('ok')
-          }, function () {
-            console.log('cancel');
-          });
+              modalInstance.result.then(function (agr) {
+                console.log('process ok: ', agr);
+              }, function () {
+                console.log('process cancel');
+              });
         }
       }
   }])
@@ -564,28 +630,35 @@
               regcourseCtrl.dirChild();
             }
         },
-        controller: function($rootScope, $scope, $http, $parse, $modal, $state, $window, getFieldFac, httpFac, auth, localStorageService, appConfig, User){
-          $scope.download = function(_id){
+        controller: function($rootScope, $scope, $http, $parse, $modal, $state, $window, getFieldFac, httpFac, auth, localStorageService, appConfig, User, modalFac, httpAdd, $timeout, cfpLoadingBar){
+          $scope.download = function(_id, _url){
             httpFac.httpFn('chapters','get',_id, function(result){
               if(result.slide.status !== "public"){
                 if($rootScope.isLogined()){
-                  console.log('getLocalCourseID: ', $scope.getLocalCourseID());
-                  console.log('userID: ', $rootScope.userInfo.userId);
-                  $http({
-                    method: 'get',
-                    url: appConfig.apiHost + '/users'
-                  })
-                  .success(function(data, status){
-                    console.log('data token: ', data);
-                  })
-                  .error(function(err, status){
-                    console.log('err', err);
+                  var userID = User.getCurrentId();
+                  httpFac.httpFn('users', 'get', userID, function(result){
+                    var courseIdArr = result.courseId,
+                        courseIdLocal = $scope.getLocalCourseID(),
+                        courseReg = false;
+                    angular.forEach(courseIdArr, function(value){
+                      if(value == courseIdLocal){
+                        courseReg = true;
+                      }else{
+                        courseReg = false;
+                      }
+                    });
+
+                    if(courseReg == true){
+                      $window.open(_url, '_blank');
+                    }else{
+                      modalFac.modalOpen('Bạn chưa đăng ký học khóa học này');
+                    }
                   })
                 }else{
                   $rootScope.goToState('app.login');
                 }
               }else{
-                console.log('public');
+                $window.open(_url, '_blank');
               }
             })
           };
@@ -595,8 +668,20 @@
             $scope.pros = orderBy($scope.pros, predicate, reverse);
           };
           // End orderBy
+          $scope.updateCourseForUser = function(_userID, _courseID){
+                var data = {};
+                data.courseID = _courseID;
+                data.UserID = _userID;
+                httpAdd.httpFn('user_courses', data, function(result){
+                  modalFac.modalOpen('Thêm học viên vào khóa học thành công');
+                  console.log('result updateCourseForUser : ', result);
+                });
+          };
           $scope.isTeacher = function(){
             return (User.isAuthenticated && $rootScope.role == 2);
+          }
+          $scope.isAdmin = function(){
+            return (User.isAuthenticated && $rootScope.role == 3);
           }
           var _courseID = 'courseID';
           $scope.setLocalCourseID= function(courseId){
@@ -605,7 +690,8 @@
           $scope.getLocalCourseID= function(){
             return localStorageService.get(_courseID);
           };
-          var _title = 'title';
+          var _title = 'title',
+              _tutionFee = 'tutionFee';
           $scope.setLocalTitle = function(title){
             console.log('setLocalTitle: ', title);
             localStorageService.set(_title, title)
@@ -613,10 +699,19 @@
           $scope.getLocalTitle= function(){
             return localStorageService.get(_title);
           };
-          getFieldFac.getField().then(function (data) {
-            $scope.listCourse = data;
+          $scope.setLocalTutionFee = function(tutionFee){
+            console.log('setLocalTitle: ', tutionFee);
+            localStorageService.set(_tutionFee, tutionFee)
+          };
+          $scope.getLocalTutionFee= function(){
+            return localStorageService.get(_tutionFee);
+          };
+          // for select box
+          getFieldFac.getField(function(result){
+            $scope.listCourse = result;
             console.log('$scope.listCourse: ', $scope.listCourse);
-          });
+          })
+
           var urlApi = $scope.sourceApi,
               type = $scope.typeMethod,
               template = $scope.template,
@@ -634,7 +729,7 @@
             $scope.arrData = arr;
             $scope.idDelete = id;
             var modalInstance = $modal.open({
-              templateUrl: 'myModalContent.html',
+              templateUrl: 'myModalContentDel.html',
               controller: ModalInstanceCtrl,
               scope : $scope,
               size: 'sm'
@@ -680,19 +775,12 @@
             })
             .success(function(data, status){
               if(status === 200){
-                var modalInstance = $modal.open({
-                  templateUrl: 'myModalContent.html',
-                  controller: ModalInstanceCtrl,
-                  scope : $scope,
-                  size: 'sm'
-                });
-                modalInstance.result.then(function () {
-                }, function(){
-                });
+                modalFac.modalOpen('Cập nhật thành công');
               }
             })
             .error(function(err){
               console.log('update error  : ', err);
+              modalFac.modalOpen('Đã có lỗi xảy ra');
             });
           };
 
@@ -704,52 +792,14 @@
             }else{
               httpFac.httpRegisterCourse(_courseID, _totalMount, function(result){
                 if(result === 200){
-                  var modalInstance = $modal.open({
-                    templateUrl: 'myModalContent.html',
-                    controller: ModalInstanceCtrl,
-                    scope : $scope,
-                    size: 'sm'
-                  });
-                  modalInstance.result.then(function () {
-                  }, function(){
-                  });
+                  modalFac.modalOpen('Đăng ký khóa học thành công');
                 }
               })
             }
           }
-
-          var _url = '';
-          if(params[2]){
-            _url = params[0].urlApi + params[2].filterInclude
-          }else{
-            _url = params[0].urlApi
-          }
-          console.log('urlApi : ', _url);
-          $http({
-            url: _url,
-            method: params[1].typeMethod
-          })
-          .success(function(data){
-            console.log('data http : ', data);
-              $scope.datas = data;
-              $scope.data = data;
-              $scope.courseName = {};
-              $scope.courseName.title = data.courseID;
-              console.log('$scope.courseName.title: ', $scope.courseName.title);
-
-              // pagination
-            $scope.totalItems = 64;
-            $scope.currentPage = 4;
-            $scope.setPage = function(pageNo) {
-              return $scope.currentPage = pageNo;
-            };
-            $scope.maxSize = 5;
-            $scope.bigTotalItems = 175;
-            return $scope.bigCurrentPage = 1;
-          // end pagination
-          })
-          .error(function(err){
-            console.log('err : ', err);
+          httpFac.httpGetMain(params, function(result){
+            console.log('result main: ', result);
+            $scope.datas = result;
           });
         },
         templateUrl: function(element, attrs){

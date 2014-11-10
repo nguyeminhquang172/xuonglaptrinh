@@ -18,20 +18,16 @@
                             <textarea name="" id="inputDescription" class="form-control" rows="4" placeholder="Mô tả" ng-model="course.desc"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="inputDayLearn">Ngày học</label>
+                            <label for="inputDayLearn">Buổi học</label>
                             <input type="text" class="form-control" id="inputDayLearn" placeholder="Ngày học" ng-model="course.dayLearn">
                         </div>
                         <div class="form-group">
                             <label for="inputDateStart">Khai giảng</label>
                             <input type="date" class="form-control" id="inputDateStart" ng-model="course.startDate">
                         </div>
-                        <div class="form-group" ng-class="{'has-error' : add_course.subTitle.$invalid && !add_course.subTitle.$pristine}">
+                        <div class="form-group">
                             <label for="inputLocation">Hình thức</label>
-                            <input type="text" class="form-control" id="inputLocation" placeholder="Hình thức" ng-model="course.location">
-                        </div>
-                        <div class="form-group" ng-class="{'has-error' : add_course.subTitle.$invalid && !add_course.subTitle.$pristine}">
-                            <label for="inputLocation">Hình thức</label>
-                            <input type="text" class="form-control" id="inputLocation" placeholder="Hình thức" ng-model="course.status">
+                            <select ng-model="course.location" ng-options="course.status for course in courseStatus" class="form-control"></select>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -41,7 +37,7 @@
                         </div>
                         <div class="form-group" ng-class="{'has-error' : add_course.avatar.$invalid && !add_course.avatar.$pristine}">
                             <label for="inputIcon">Icon</label>
-                            <input name="avatar" type="url" class="form-control" id="inputIcon" placeholder="Url icon" ng-model="course.image" required>
+                            <input name="avatar" type="text" class="form-control" id="inputIcon" placeholder="Url icon" ng-model="course.image" required>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputSummaryContents">Tóm tắt nội dung</label>
@@ -52,13 +48,13 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputTime">Số giờ học: (giờ)</label>
-                                    <input type="number" class="form-control" id="inputTime" placeholder="0" ng-model="course.timeLearn">
+                                    <input type="text" class="form-control" id="inputTime" placeholder="0" ng-model="course.timeLearn">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="inputPrice">Lệ phí: (VNĐ)</label>
-                                    <input type="number" class="form-control" id="inputPrice" placeholder="0" ng-model="course.tutionFee">
+                                    <input type="text" class="form-control" id="inputPrice" placeholder="0" ng-model="course.tutionFee">
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -85,13 +81,13 @@
 </div>
 <script type="text/ng-template" id="myModalContent.html">
     <div class="modal-header">
-        <h3 class="modal-title">Thông báo</h3>
+        <h3 class="modal-title">Messages</h3>
     </div>
     <div class="modal-body">
-        Thêm thành công !
+        {{message}}
     </div>
     <div class="modal-footer">
         <button class="btn btn-primary" ng-click="ok()">OK</button>
-        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-warning" ng-click="cancel()">Tiếp tục thêm</button>
     </div>
 </script>
